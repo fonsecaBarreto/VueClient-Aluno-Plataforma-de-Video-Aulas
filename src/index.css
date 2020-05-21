@@ -1,0 +1,45 @@
+:root {
+  --primary-color: #193D89;
+  --second-color: #E41311;
+  --third-color: #27BBE0;
+}
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+@font-face {
+  font-family: "GothamMedium";
+  src: url("./assets/GothamMedium.ttf");
+}
+
+@font-face {
+  font-family: "gothamUltra";
+  src: url("./assets/gotham-ultra.otf");
+}
+@font-face {
+  font-family: "gothamBook";
+  src: url("./assets/gotham-book.otf");
+}
+*{
+ font-family: 'gothamBook', Arial, sans-serif;
+  box-sizing: border-box;
+}
+.bd-red{border: solid 2px red;}
+.bd-green{border: dashed 2px green;}
+.bd-yellow{border: solid 3px yellow;}
+.bd-blue{border: solid 1px blue;} 
+ 
+.rollup-enter-active, .rollup-leave-active {
+  transition: all .25s;
+  transform: translateY(0);
+}
+.rollup-enter, .rollup-leave-to /* .fade-leave-active em versões anteriores a 2.1.8 */ {
+  transition: all .25s;
+  opacity: 0;
+  transform: translateY(-200px);
+
+}
