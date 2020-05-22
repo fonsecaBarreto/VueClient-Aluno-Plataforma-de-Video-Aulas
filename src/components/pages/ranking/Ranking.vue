@@ -2,8 +2,15 @@
   <div id="ranking">
     <div class="box">
       <img class="ranking-img" src="../../../assets/ranking.svg" alt="">
+      <div class="d-flex flex-column my-2">
+
+        <span class="ranking-title ">Ranking</span>
+        <span class="ranking-text">Vencer um desafio,
+Procurar a superação,
+Escapar por um fio,
+E torná-se campeão,</span>
+      </div>
      
-      <span class="ranking-text">Ranking</span>
       <div class="ranking-flow ">
         <ranking-item v-for="(a,i) in ranking" :key="i" :aluno="a" :numeration="i+1"></ranking-item>
       </div>
@@ -45,14 +52,22 @@ export default {
 
 <style>
   .ranking-img{
-    width: 200px;
+    width: 165px;
     margin: auto;
   }
 
-  .ranking-text{
+  .ranking-title{
     font-size: 2.2em;
-    line-height: 2.5em;
+    line-height: 1.6em;
      margin: auto;
+  }
+  .ranking-text{
+    font-size: 1.1em;
+    max-width: 520px;
+     margin: auto;
+     color:#656565;
+     text-align: center;
+     padding: 0 16px;
   }
  .box{
     position: relative;
@@ -66,7 +81,7 @@ export default {
     grid-template-rows:  1fr;
     max-width: 700px;
     margin: auto;
-    margin-top: 64px;
+    margin-top: 32px;
 
     padding: 32px 12px;
   }
@@ -76,5 +91,7 @@ export default {
     flex-direction: column;
     align-items: center;
     flex: 1;
+    border-top: solid 1px #ccc;
+    margin-top: 32px;
   }
 </style>

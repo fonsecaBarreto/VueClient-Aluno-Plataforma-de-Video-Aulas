@@ -8,9 +8,21 @@ import {Modulo} from './modules_store'
 Vue.use(Vuex)
 export default new Vuex.Store({
   modules:{Aluno,Modulo},
-  state:{},
+  state:{
+    menu:false,
+    loading:false,
+  },getters:{
+    get_menu:(state)=>state.menu,
+    get_loading:(state)=>state.loading,
+  },mutations:{
+    set_menu:(state,v)=>state.menu=v,
+    set_loading:(state,v)=>state.loading=v
+  },
   actions:{
-    async uploadImage (c,{formData,params=""}){
+    toggleMenu({commit,state}){
+      commit("set_menu",!state.menu)
+    }
+    ,async uploadImage (c,{formData,params=""}){
       try{
         const {data} = await axios.post(`/profilepic${params}`,formData,{'Content-Type': 'multipart/form-data' }) 
         return {data,err:null}; 

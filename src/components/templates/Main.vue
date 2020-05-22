@@ -4,8 +4,8 @@
     <Menu></Menu>
     <Content>
       <slot></slot>
+       <div class="loading-div" v-if="get_loading == true"></div>
     </Content>
-    
   </div>
 </template>
 
@@ -13,12 +13,27 @@
 import Menu from "./Menu"
 import Content from "./Content"
 import HeaderHeader from "./HeaderHeader"
+import {mapGetters} from "vuex"
 export default {
-  components:{Menu,Content,HeaderHeader}
+  components:{Menu,Content,HeaderHeader},
+  computed:{...mapGetters(["get_loading"])}
 }
 </script>
 
 <style>
+ .loading-div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(248, 247, 247, 0.7);
+    background-image: url("../../assets/loading.svg");
+    background-repeat: no-repeat;
+    background-size: 180px;
+    background-position: center;
+    z-index: 9999;
+  }
 #main-template{
   width:100vw;
   height: 100vh;
@@ -34,8 +49,8 @@ export default {
     grid-template-areas: "header header" "content content" 
   }
 }
-.content{grid-area: header;}
-.content{grid-area: content;}
+.header{grid-area: header;}
+.content{grid-area: content;position: relative;}
 .menu{grid-area: menu;}
   .menu-item{
     color: white;

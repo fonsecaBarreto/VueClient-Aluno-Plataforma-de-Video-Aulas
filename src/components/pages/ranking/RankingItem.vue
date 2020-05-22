@@ -1,15 +1,14 @@
 <template>
   <div class="ranking-item">
     <span class="numeration">{{numeration}}</span>
-   <div class="imgvp" :class="{'onhold':aluno == null || aluno.picture == null}">
-       <img  v-if="aluno_result.picture != null" :src="aluno_result.picture.sm" alt="">
 
-    </div>
+    <user-profile :user="aluno"  ></user-profile>
+  
    <span class="name " :class="{'onhold': aluno_result.name == null }">{{aluno_result.name}}</span>
-   <span class="points" :class="{'onhold': aluno_result.points == null }">
+   <span class="points" :class="{'onhold': aluno_result.name == null  && aluno_result.points == null}">
      
       <font-awesome-icon icon="star"></font-awesome-icon>
-     {{aluno_result.points}}</span> 
+     {{aluno_result.points || '0'}}</span> 
   </div>
 </template>
 
@@ -19,19 +18,15 @@ const INITIAL_ALUNO ={
   points:null,
   picture:null
 }
+import UserProfile from "../../utils/UserProfile"
 export default {
+  components:{UserProfile},
   props:{aluno:Object,numeration:Number},
   computed:{
     aluno_result(){
-        if(this.aluno != null){
-          return {
-            name:this.aluno.name || null,
-            points:this.aluno.points || null,
-            picture:this.aluno.picture || null,
-            
-            }
-        }
-        return {...INITIAL_ALUNO}
+        var aluno = {...INITIAL_ALUNO};
+        if(this.aluno != null)aluno = {...this.aluno};
+        return aluno
     }
   }
 }
@@ -48,13 +43,14 @@ export default {
    
     max-width: 720px;
     width: 100%;
-    height: 40px;
+    height: 50px;
     border-bottom: solid 1px #ddd;
     display:flex;
     flex-direction: row;
     justify-content: start;
     align-items: center;
     padding: 0 22px;
+    margin-top: 6px;
   }
   
   .ranking-item .imgvp{
@@ -77,6 +73,7 @@ export default {
     height: 1.4em;
     font-size: 1em;
     line-height: 1.4em;
+    font-weight: 600;
     text-transform: uppercase;
     margin-left: 22px;
     position: relative;
@@ -99,7 +96,8 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #ddd;
+    border-radius: 6px;
+    background-color: #eee;
   
   }
 </style>

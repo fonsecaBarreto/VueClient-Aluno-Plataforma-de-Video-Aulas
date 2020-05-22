@@ -38,12 +38,18 @@ export default {
     height: 100%;
     width: 10px;
     background-color: #ddd;
+    transition: background-color .2s;
   }
-  .aula-item:active .aula-row:after{
-    transition: all .2s;
-    background-color: rgb(253, 255, 254);
+  .aula-item:hover .aula-row:after{
+    transition: all .5s;
+    background-color: rgb(255, 255, 255);
     width: 100%;
     z-index: -1;
+  }
+  .aula-item:active .aula-row:after{
+    width: 100%;
+    border: black;
+     width: 10px;
   }
   .name{
     flex:1;

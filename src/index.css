@@ -33,6 +33,7 @@
 .bd-yellow{border: solid 3px yellow;}
 .bd-blue{border: solid 1px blue;} 
  
+
 .rollup-enter-active, .rollup-leave-active {
   transition: all .25s;
   transform: translateY(0);
@@ -42,4 +43,16 @@
   opacity: 0;
   transform: translateY(-200px);
 
+}
+::-webkit-scrollbar-track {
+  background-color: #F4F4F4;
+}
+::-webkit-scrollbar {
+  width: 9px;
+  background: #bbb;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 5px;
 }

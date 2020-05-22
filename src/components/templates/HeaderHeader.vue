@@ -3,13 +3,13 @@
     <div class="header-row ">
       <user-profile :user="get_user"></user-profile>
       <img  class="logo" src="../../assets/logo.png" alt="">
-      <span class="toggle-button" @click="expand =!expand">
+      <span class="toggle-button" @click="toggleMenu()">
         <font-awesome-icon icon="bars"></font-awesome-icon>
       </span>
       
     </div>
     <transition name="rollup">
-      <div class="header-menu " v-if="expand">
+      <div class="header-menu " v-if="get_menu">
         <menu-contents>
         </menu-contents>
       </div>
@@ -30,8 +30,14 @@ export default {
       expand:false
     }
   },
+  methods:{
+    toggleMenu(){
+      this.$store.dispatch("toggleMenu");
+      
+    }
+  },
   computed:{
-    ...mapGetters(["get_user"]),
+    ...mapGetters(["get_user","get_menu"]),
   }
 }
 </script>

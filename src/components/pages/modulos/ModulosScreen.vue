@@ -15,7 +15,7 @@ export default {
   computed:{...mapGetters(["get_modules"]),
   modulos(){
       var modules =this.get_modules;
-      return modules || [null,null,null,null,null,null,null,null,null]
+      return modules || []
     }
   },
   async mounted(){

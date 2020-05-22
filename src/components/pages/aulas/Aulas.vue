@@ -29,7 +29,7 @@ export default {
     
     aulas(){
       var modules = this.modules;
-      return modules || [null,null,null,null,null,null,null,null,null]
+      return modules || []
     },
     path(){return this.$route.params.module}
   },

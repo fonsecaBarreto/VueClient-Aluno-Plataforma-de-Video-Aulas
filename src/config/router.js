@@ -21,6 +21,8 @@ const routes = [
 import store from './store'
 const publicPages = ["/","/login"]
 async function guardRotine(to,from,next){
+  if(store.getters["get_loading"] == false) store.commit("set_loading",true)
+  if(store.getters["get_menu"] == true) store.commit("set_menu",false);
   if(!publicPages.includes(to.path)){
     const err = await store.dispatch("verifyToken");
     if(err) return next("/login");
@@ -36,5 +38,9 @@ const router = new VueRouter({
   mode:"history",
   scrollBehavior
 });
+router.afterEach(() => {
+  if(store.getters["get_loading"] == true) store.commit("set_loading",false)
+  window.scrollTo(0, 0)
+})
 router.beforeEach(guardRotine)
 export default router

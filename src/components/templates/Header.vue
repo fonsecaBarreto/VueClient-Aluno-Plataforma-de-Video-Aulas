@@ -4,6 +4,9 @@
     <div class="user-div mr-0 ml-auto">
         <span class="user-name">{{user.name}} </span>
         <user-profile :user="get_user"></user-profile>
+        <drop-down >
+               <router-link to="/logout">logout</router-link>
+            </drop-down>
     </div> 
   </div>
 </template>
@@ -11,9 +14,9 @@
 <script>
 import { mapGetters } from 'vuex'
 import UserProfile from "../utils/UserProfile";
-
+import DropDown from "../utils/Dropdown"
 export default {
-  components:{UserProfile},
+  components:{UserProfile,DropDown},
   props:{title:String},
   computed:{
     ...mapGetters(["get_user"]),

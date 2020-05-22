@@ -31,7 +31,7 @@ export default {
     result_exercises(){
 
       var exercises = this.exercises;
-      return exercises || [null,null,null,null,null,null,null,null,null]
+      return exercises || []
     },
     path(){return this.$route.params.path}
   },
