@@ -44,7 +44,7 @@ export default {
   }
     
   .menu-item:hover{
-    background-color: rgba(0,0,0,.2);
+    background-color: rgba(0,0,0,.15);
     text-decoration: none;
     color: white;
   }

@@ -2,7 +2,9 @@
   <header class="header" :class="{expand}" >
     <div class="header-row ">
       <user-profile :user="get_user"></user-profile>
-      <img  class="logo" src="../../assets/logo.png" alt="">
+      <router-link to="/">
+        <img  class="logo" src="../../assets/logo.png" alt="">
+      </router-link>
       <span class="toggle-button" @click="toggleMenu()">
         <font-awesome-icon icon="bars"></font-awesome-icon>
       </span>
@@ -48,7 +50,9 @@ export default {
     width: 100%;
     min-height: 200px;
     background: rgb(25,61,137);
+        background-color: #720615;
      box-shadow: 0px 4px 9px #0003;
+       
     z-index: -1;
     position: absolute;
     top: 64px;left:0;
@@ -69,6 +73,7 @@ export default {
   }
   header.header .header-row{
     background: rgb(25,61,137);
+    background-color: #720615;
     width: 100%;
     height: 64px;
     position: relative;
@@ -76,7 +81,7 @@ export default {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 2px 5px #0003;
+    box-shadow: 0px 2px 5px #0004;
     padding: 0 16px;
   }
  
@@ -113,6 +118,8 @@ export default {
   .toggle-button:hover{
     background-color: #ffffff02;
     border: solid 1px rgb(24, 56, 124);
+    border: solid 1px #660714;
+
   }
   .toggle-button:active{
     transition: all .08s;

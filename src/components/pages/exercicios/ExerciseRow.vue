@@ -59,6 +59,7 @@
         </div>
       </div>
     </transition>
+    <freeze-loading v-if="loading"></freeze-loading>
   </div>
 </template>
 
@@ -69,9 +70,10 @@ const INITIAL_INPUTS = {
     option:null
 }
 import ButtonA from "../../utils/ButtonA"
+import FreezeLoading from "./FreezeLoading"
 export default {
   props:{data:Object},
-  components:{ButtonA},
+  components:{ButtonA,FreezeLoading},
   data(){
     return{
       expanded:false,
@@ -93,23 +95,37 @@ export default {
     edit(){
       this.disabled = false;
     },
-    sucesso(){
+    sucesso(title,msg,timer=1600,success=true){
       this.$swal( {
-        title: "Enviado com sucesso!",
-        text: "Aguarde o correção",
-        icon: "success",
+        title,
+        text:msg,
+        icon: success ? "success" : "warning",
         buttons: false,
-        timer: 1800,
+        timer,
       })
     },
     toggle(){this.expanded = !this.expanded},
     async send(){
-      const {data,err} = await this.$store.dispatch("sendAnswer",{...this.answer,type:this.data.type});
-      if(!err && data){
-         this.sucesso()
-         this.disabled = true
-         this.$emit("updatereply",data)
-      } 
+      this.loading = true;
+      setTimeout(async ()=>{
+
+        const {data,err} = await this.$store.dispatch("sendAnswer",{...this.answer,type:this.data.type});
+        if(!err && data){
+          if(this.data.type != 1)
+            this.sucesso("Enviado com sucesso!","Aguarde o correção");
+          else{
+            if(data.solved)
+              this.sucesso("congratulations","Confira a correção",1340,true);
+            else
+              this.sucesso("badly","Confira a correção",1340,false);
+              
+
+          }
+          this.loading = false;
+          this.disabled = true
+          this.$emit("updatereply",data)
+        } 
+      },2000)
      
     }
   
@@ -162,6 +178,7 @@ export default {
   cursor: pointer;
 }
 .exercise-item{
+  position: relative;
   width: 100%;
   min-height: 36px;
   box-shadow: 0px 2px 6px #00000008;
@@ -222,6 +239,7 @@ export default {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   color: #333;
+  margin-right: 8px;
   
 }
 .full-enunciation{

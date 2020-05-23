@@ -4,12 +4,15 @@ export const Modulo = {
   state:{
     modules:null,
     module_title:null,
-    ranking:null
+    ranking:null,
+    selfRanking:null
   },getters:{
+    get_selfRanking:state=>state.selfRanking,
     get_ranking:state=>state.ranking,
     get_module_title: state=>state.module_title,
     get_modules: state=>state.modules,
   },mutations:{
+    set_selfRanking:(state,v)=>state.selfRanking=v,
     set_ranking:(state,v)=>state.ranking=v,
     set_module_title: (state,v)=> state.module_title=v,
     set_modules: (state,v)=> state.modules=v
@@ -17,7 +20,9 @@ export const Modulo = {
     async loadRanking({commit}){
       try{
         const {data} = await axios.get(`/students/ranking`);
-        commit("set_ranking",data)
+        console.log(data)
+        commit("set_ranking",data.ranking)
+        commit("set_selfRanking",data.user)
       }catch(err){return err.response.data.errors || err.response}
     },
     async sendAnswer({commit},answer){

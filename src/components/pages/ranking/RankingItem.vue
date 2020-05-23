@@ -1,8 +1,10 @@
 <template>
   <div class="ranking-item">
     <span class="numeration">{{numeration}}</span>
+    <div class="user-img-vp " :class="{'img-holding':aluno_result.name == null }">
 
-    <user-profile :user="aluno"  ></user-profile>
+      <user-profile :user="aluno" v-if="aluno_result.name != null" ></user-profile>
+    </div>
   
    <span class="name " :class="{'onhold': aluno_result.name == null }">{{aluno_result.name}}</span>
    <span class="points" :class="{'onhold': aluno_result.name == null  && aluno_result.points == null}">
@@ -33,6 +35,21 @@ export default {
 </script>
 
 <style scoped>
+  .user-img-vp{
+    position: relative;
+    height: 38px;
+    width: 38px;
+  }
+  .user-img-vp.img-holding:after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left:0;top:0;
+    border-radius: 50%;
+    background-color: red;
+    background-color: #eee;
+  }
   .numeration{
     font-size: 1.2em;
     color: #888;
@@ -73,7 +90,7 @@ export default {
     height: 1.4em;
     font-size: 1em;
     line-height: 1.4em;
-    font-weight: 600;
+    font-weight: 500;
     text-transform: uppercase;
     margin-left: 22px;
     position: relative;

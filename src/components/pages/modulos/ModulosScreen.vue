@@ -42,7 +42,7 @@ export default {
      grid-template-columns: repeat(3, 1fr);
   }
 }
-@media only screen and (max-width: 960px){
+@media only screen and (max-width: 1024px){
    .conteudos-flow{
      grid-template-columns: repeat(2, 1fr);
   }

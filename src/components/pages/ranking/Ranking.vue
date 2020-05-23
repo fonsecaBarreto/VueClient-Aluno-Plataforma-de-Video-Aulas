@@ -6,9 +6,9 @@
 
         <span class="ranking-title ">Ranking</span>
         <span class="ranking-text">Vencer um desafio,
-Procurar a superação,
-Escapar por um fio,
-E torná-se campeão,</span>
+          Procurar a superação,
+          Escapar por um fio,
+          E torná-se campeão,</span>
       </div>
      
       <div class="ranking-flow ">
