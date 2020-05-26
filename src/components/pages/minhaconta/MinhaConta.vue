@@ -152,7 +152,6 @@ export default {
     grid-template-columns: 280px 1fr;
     grid-template-rows:  1fr;
     max-width: 960px;
- 
     margin-top: 42px;
     padding: 32px 21px;
   }
@@ -168,8 +167,17 @@ export default {
     align-items: center;
     padding: 22px;
   }
+  @media only screen and (max-width:756px){
+    .box{
+      padding: 32px 12px;
+    }
+    .right{
+      padding: 12px;
+    }
+  }
   @media only screen and (max-width:960px){
   .box{
+      
       grid-template-columns: 1fr !important;
       grid-template-rows: 280px 1fr;
     }

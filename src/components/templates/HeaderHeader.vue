@@ -49,17 +49,17 @@ export default {
   .header-menu{
     width: 100%;
     min-height: 200px;
-    background: rgb(25,61,137);
-        background-color: #720615;
-     box-shadow: 0px 4px 9px #0003;
-       
+    background: #2b5876; 
+    background: -webkit-linear-gradient(to right, #4e4376, #2b5876);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4e4376, #2b5876); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    box-shadow: 0px 4px 9px #0003;
     z-index: -1;
     position: absolute;
     top: 64px;left:0;
    
   }
   header.header{
-    transition: all .2s;
+    transition: height .2s;
     position: relative;
     width:100vw;
     height: fit-content;
@@ -72,8 +72,13 @@ export default {
     
   }
   header.header .header-row{
-    background: rgb(25,61,137);
-    background-color: #720615;
+ /*    background: rgb(25,61,137);
+    background-color: #720615; */
+       background: #2b5876;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4e4376, #2b5876);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4e4376, #2b5876); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
     width: 100%;
     height: 64px;
     position: relative;
@@ -117,8 +122,8 @@ export default {
   }
   .toggle-button:hover{
     background-color: #ffffff02;
-    border: solid 1px rgb(24, 56, 124);
-    border: solid 1px #660714;
+
+    border: solid 1px #0002
 
   }
   .toggle-button:active{

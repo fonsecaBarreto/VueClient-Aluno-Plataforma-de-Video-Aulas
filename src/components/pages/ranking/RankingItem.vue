@@ -1,8 +1,7 @@
 <template>
-  <div class="ranking-item">
+  <div class="ranking-item" :class="{highlight}">
     <span class="numeration">{{numeration}}</span>
     <div class="user-img-vp " :class="{'img-holding':aluno_result.name == null }">
-
       <user-profile :user="aluno" v-if="aluno_result.name != null" ></user-profile>
     </div>
   
@@ -23,7 +22,7 @@ const INITIAL_ALUNO ={
 import UserProfile from "../../utils/UserProfile"
 export default {
   components:{UserProfile},
-  props:{aluno:Object,numeration:Number},
+  props:{aluno:Object,numeration:Number,highlight:Boolean},
   computed:{
     aluno_result(){
         var aluno = {...INITIAL_ALUNO};
@@ -51,23 +50,48 @@ export default {
     background-color: #eee;
   }
   .numeration{
-    font-size: 1.2em;
+    font-size: 1.25em;
     color: #888;
-   
-    width: 36px;
+    width: 64px;
   }
   .ranking-item{
-   
     max-width: 720px;
     width: 100%;
-    height: 50px;
+    height: 52px;
     border-bottom: solid 1px #ddd;
     display:flex;
     flex-direction: row;
     justify-content: start;
     align-items: center;
-    padding: 0 22px;
+    padding: 0 18px;
     margin-top: 6px;
+  }
+  @media only screen and (max-width:756px){
+     .ranking-item{padding: 0 12px}
+     .numeration{
+      font-size: 1em;
+      color: #888;
+      width: 30px;
+      overflow:hidden;
+    }
+   
+  }
+   @media only screen and (max-width:320px){
+     
+    .user-img-vp{
+      display: none;
+    }
+   }
+  .ranking-item.highlight{
+    background-color: #8d0f20;
+    background: #2b5876ee;  
+    
+
+    border-radius: 16px;
+  
+  }
+  .ranking-item.highlight *{
+      color: white!important;
   }
   
   .ranking-item .imgvp{
@@ -87,13 +111,23 @@ export default {
   }
   .ranking-item .name{
     flex:1;
-    height: 1.4em;
+    min-height: 1.4em;
     font-size: 1em;
-    line-height: 1.4em;
+    line-height: 1.3em;
     font-weight: 500;
     text-transform: uppercase;
     margin-left: 22px;
     position: relative;
+    max-height: 2.6em;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-align: left;
+    width: 100%;
   }
 
   .ranking-item .points{

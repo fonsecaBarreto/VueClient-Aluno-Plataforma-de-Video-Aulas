@@ -44,15 +44,18 @@
   transform: translateY(-200px);
 
 }
-::-webkit-scrollbar-track {
-  background-color: #F4F4F4;
-}
-::-webkit-scrollbar {
-  width: 9px;
-  background: #bbb;
-  border-radius: 5px;
-}
-::-webkit-scrollbar-thumb {
-  background: #bbb;
-  border-radius: 5px;
+@media only screen and (min-width:960px){
+
+  ::-webkit-scrollbar-track {
+    background-color: #F4F4F4;
+  }
+  ::-webkit-scrollbar {
+    width: 9px;
+    background: #bbb;
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 5px;
+  } 
 }

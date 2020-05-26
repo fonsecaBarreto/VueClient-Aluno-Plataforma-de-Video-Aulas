@@ -1,11 +1,12 @@
 <template>
   <div class="content ">
     <div class="app-container">
-      <transition name="rollup">
+     
         <app-header v-if="title!= null" class="header" :title="title"></app-header>
-      </transition>
-      <slot></slot>
-    
+  
+  
+          <slot></slot>
+  
     </div>
   </div>
 </template>
@@ -30,8 +31,6 @@ export default {
   .content{
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: #304e4e10;
     padding-bottom: 250px;
   }
 </style>

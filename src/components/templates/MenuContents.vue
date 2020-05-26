@@ -3,7 +3,7 @@
  
       <router-link to="/modules" class="menu-item">
         <font-awesome-icon icon="archive"></font-awesome-icon> 
-        <span>Conteudos</span>
+        <span>Módulos</span>
       </router-link>
       <router-link to="/profile" class="menu-item">
         <font-awesome-icon icon="user"></font-awesome-icon> 

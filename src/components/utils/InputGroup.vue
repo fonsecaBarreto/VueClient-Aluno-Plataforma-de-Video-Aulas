@@ -32,7 +32,7 @@ export default {
     }
     .form-input.red-line input{border-bottom: 1pt solid rgb(199, 19, 19) !important;}
     input[type="text"], input[type="password"],  input[type="number"],  textarea,  select{
-        min-width: 160px;
+        min-width: 120px;
         font-size: 1.2em;
         padding: 6px 8px;
     }

@@ -19,6 +19,7 @@ export default {
     }
   },
   async mounted(){
+     this.$root.$emit('scrollAfterEnter');
     if(this.get_modules == null){
       const err = await this.$store.dispatch("loadModules");
       if(err) console.log(err)

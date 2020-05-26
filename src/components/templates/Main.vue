@@ -35,29 +35,35 @@ export default {
     z-index: 9999;
   }
 #main-template{
+  background-color: #304e4e10;
   width:100vw;
-  height: 100vh;
+  height: 100%;
   flex:1;
   display:grid;
   grid-template-rows: auto 1fr;
   grid-template-columns: auto 1fr ;
   grid-template-areas: "menu content" "menu content";
-  transition: .25s;
+  overflow: scroll; 
+  overflow-y: overlay;
+  overflow-x: hidden;
 }
 @media only screen and (max-width:960px){
   #main-template{
+  /*  
+    overflow-y: scroll;
+    overflow: visible; */
     grid-template-areas: "header header" "content content" 
   }
 }
 .header{grid-area: header;}
-.content{grid-area: content;position: relative;}
-.menu{grid-area: menu;}
-  .menu-item{
-    color: white;
-    font-size: 1.1em;
-    padding: 6px 20px;
-  }
-  .menu-item span{
-    margin-left: 8px;
-  }
+.content{grid-area: content;position: relative}
+.menu{grid-area: menu;position: sticky; top:0;left:0}
+.menu-item{
+  color: white;
+  font-size: 1.1em;
+  padding: 6px 20px;
+}
+.menu-item span{
+  margin-left: 8px;
+}
 </style>

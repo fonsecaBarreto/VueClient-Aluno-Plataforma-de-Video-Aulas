@@ -79,7 +79,7 @@ export default {
   }
   .imgin-perfil .vp{
     border: solid 3px rgb(250, 250, 250);
-    box-shadow: 0px 2px 3px #0002;
+    box-shadow: 0px 2px 3px rgba(51, 51, 51, 0.133);
     position: relative;
     overflow: hidden;
     border-radius: 4px;

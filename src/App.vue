@@ -1,22 +1,21 @@
 <template>
-  <div id="app" class="">
-  
-     <router-view name="templatelayout">
-         <vue-page-transition name="fade-in-up">
+  <div id="app">
+  <!-- 
+    <vue-page-transition name="fade-in-up">
+    </vue-page-transition> -->
+      <router-view name="templatelayout" >
         <router-view name="content"></router-view>
-         </vue-page-transition>
-    </router-view>
-   
+      </router-view>
   </div>
 </template>
 
 <script>
 
-
+import Main from "./components/templates/Main"
 export default {
   name: 'App',
   components: {
-   
+   Main
   }
 }
 </script>
@@ -26,10 +25,13 @@ export default {
 /*   font-family: "GothamMedium", Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
   color: #444;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+ 
 }
 .app-container{
   max-width: 1224px;
@@ -38,7 +40,7 @@ export default {
 }
 @media screen and (max-width: 960px) {
   .app-container{
-    padding: 0 8px;
+    padding: 0 16px;
   }
 }
 </style>
