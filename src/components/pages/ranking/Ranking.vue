@@ -43,12 +43,10 @@ export default {
     }
   },
   async mounted(){
-
-     this.$store.commit("set_module_title",null)
-    if(this.get_ranking == null){
-      const err =await this.$store.dispatch("loadRanking");
-      if(err) console.log(err)
-    }
+    this.$store.commit("set_module_title",null)
+    const err =await this.$store.dispatch("loadRanking");
+    if(err) console.log(err)
+    
   }
 }
 </script>
