@@ -1,7 +1,8 @@
 <template>
   <div class="aula-item" :class="{'onhold':data==null}" >
     <div v-if="data != null" class="aula-row">
-      <div class="name" >{{data.name}}</div>
+      <div class="name" >
+        {{data.name}}</div>
     </div>
   </div>
 </template>

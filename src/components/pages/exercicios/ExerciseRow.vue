@@ -1,11 +1,16 @@
 <template>
   <div class="exercise-item" :class="{'onhold':data==null,expanded}"  >
     <div v-if="data" class="exercise-row" :class="{'correct':data.reply && data.reply.solved == true, 'incorrect':data.reply && data.reply.solved == false}">
+
        <div class="expand-button " @click="toggle()"> 
          <font-awesome-icon :icon=" expanded ?'chevron-down' : 'chevron-right'"/>
       </div>
       <transition name="roll" >
-        <span class="enunciation" v-if="!expanded"> {{data.enunciation}} </span>
+      
+        <span class="enunciation" v-if="!expanded">
+          
+         
+           {{data.enunciation}} </span>
     
         <span class="tip" v-if="expanded && data.tip">
             <font-awesome-icon icon="question-circle" class="questionmark"></font-awesome-icon>
@@ -175,6 +180,7 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: .8em;
+  color:#333;
   cursor: pointer;
 }
 .exercise-item{
@@ -194,7 +200,6 @@ export default {
   font-size: 1em;
   text-align: left;
   line-height: 1em;
-
   white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -242,6 +247,7 @@ export default {
   margin-right: 8px;
   
 }
+
 .full-enunciation{
   flex:1;
   width: 100%;
