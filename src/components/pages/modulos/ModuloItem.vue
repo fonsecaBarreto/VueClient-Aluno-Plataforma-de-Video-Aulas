@@ -25,7 +25,7 @@ export default {
     props:{data:Object},
     methods:{
       route(path){
-        console.log(path)
+       
         this.$router.push({path:`/modules/${path}`})
       }
     }
@@ -42,18 +42,16 @@ export default {
     width: 100%;
     min-height: 300px;
     overflow: hidden;
-    box-shadow: 0px 2px 6px #0001;
+    box-shadow: 0px 2px 4px #0001;
     border: solid 1px #ddd;
     max-height: 100%;
-    border-radius: 4px;
-
+    border-radius: 2px;
     cursor: pointer;
     background-color: white;
   }
   .modulo-item:hover{
     transition: all .2s;
-    transform:  scale(1.006);
-    box-shadow: 0px 4px 12px #0002;
+    box-shadow: 0px 3px 8px #0002;
   }
  
   .modulo{
@@ -69,7 +67,7 @@ export default {
     overflow: hidden;
   } 
   .modulo-item:hover .modulo .img-vp> img{
-    transition: transform .35s;
+    transition: transform .3s;
     transform: scale(1.06);
   }
   .write-content{

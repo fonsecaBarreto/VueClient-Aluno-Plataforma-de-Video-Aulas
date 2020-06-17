@@ -74,26 +74,19 @@ export default {
       width: 30px;
       overflow:hidden;
     }
-   
   }
    @media only screen and (max-width:320px){
-     
-    .user-img-vp{
-      display: none;
-    }
+    .user-img-vp{ display: none;}
    }
   .ranking-item.highlight{
     background-color: #8d0f20;
     background: #2b5876ee;  
-    
-
-    border-radius: 16px;
-  
+    background: #2b5876;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4e4376, #2b5876);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4e4376, #2b5876); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-radius: 12px;
   }
-  .ranking-item.highlight *{
-      color: white!important;
-  }
-  
+  .ranking-item.highlight *{color: white!important;}
   .ranking-item .imgvp{
     height: 32px;
     width: 32px;

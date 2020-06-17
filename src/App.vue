@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-  <!-- 
-    <vue-page-transition name="fade-in-up">
-    </vue-page-transition> -->
       <router-view name="templatelayout" >
         <router-view name="content"></router-view>
       </router-view>
@@ -16,6 +13,17 @@ export default {
   name: 'App',
   components: {
    Main
+  },
+  created() {
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
+  },
+  destroyed() {window.removeEventListener('resize', this.handleResize);},
+  methods: {
+    handleResize() {
+      this.$store.commit("set_screenWidth",window.innerWidth)
+    
+    }
   }
 }
 </script>
@@ -40,7 +48,7 @@ export default {
 }
 @media screen and (max-width: 960px) {
   .app-container{
-    padding: 0 16px;
+    padding: 0 12px;
   }
 }
 </style>

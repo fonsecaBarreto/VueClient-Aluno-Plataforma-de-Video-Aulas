@@ -14,27 +14,27 @@ const routes = [
   { name:"Minha Conta", path:"/profile",components:{templatelayout:MainTemplate,content:MinhaConta}},
   { path:"/modules/:module/:path",components:{templatelayout:MainTemplate,content:Exercises}},
   { path:"/modules/:module",components:{templatelayout:MainTemplate,content:Aulas}},
-  { name:"Modulos", path:"/modules",components:{templatelayout:MainTemplate,content:modulos}},
+  { name:"Módulos", path:"/modules",components:{templatelayout:MainTemplate,content:modulos}},
   {path:"/login",components:{templatelayout:Login,content:null}},
   {path:"/logout",beforeEnter:logout},
   {path:"/",redirect:"/modules"},
   {path:"*",components:{templatelayout:NotFound,content:null}},
 ]
 import store from './store'
-const publicPages = ["/","/login","*"];
+const publicPages = ["/","/login"];
 async function guardRotine(to,from,next){
  
   if(store.getters["get_loading"] == false) store.commit("set_loading",true)
   if(store.getters["get_menu"] == true) store.commit("set_menu",false);
   if(!publicPages.includes(to.path)){
     const err = await store.dispatch("verifyToken");
-    if(err) return next("/login");
+    if(err != undefined) return next("/login");  
   }
   next()
 }
 async function logout(to,from,next){
   await store.dispatch("clearStorage");
-  next("/")
+  window.location.href="/"
 }
 const router = new VueRouter({
   routes,

@@ -49,9 +49,8 @@ export default {
 }
 @media only screen and (max-width:960px){
   #main-template{
-  /*  
-    overflow-y: scroll;
-    overflow: visible; */
+
+    overflow: visible;
     grid-template-areas: "header header" "content content" 
   }
 }

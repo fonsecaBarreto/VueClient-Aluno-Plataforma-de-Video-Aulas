@@ -20,9 +20,7 @@ export default {
     }
   },
   methods:{
-    route(path){
-      console.log("routing")
-      this.$router.push({path:`/modules/${this.path}/${path}`})
+    route(path){ this.$router.push({path:`/modules/${this.path}/${path}`})
     }
   },
   computed:{
@@ -35,7 +33,6 @@ export default {
   },
   async mounted(){
     if(this.modules == null){
-      
       const {data,err} = await this.$store.dispatch("loadModulesChilds",this.path);
       if(err)console.log(err)
       if(data) {
@@ -68,6 +65,11 @@ export default {
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: auto;
     gap: 4px;
-    padding: 32px 12px;
+    padding: 32px 8px;
+  }
+  @media only screen and (max-width:960px){
+    .conteudos-flow{
+      padding: 32px 0;
+    }
   }
 </style>

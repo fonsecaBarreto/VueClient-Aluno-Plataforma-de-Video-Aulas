@@ -34,17 +34,22 @@ export const Aluno = {
         const {data} = await axios.post(`/students/signin`,{email,password})
         localStorage.setItem(STORAGE_KEY,data.accessToken);
         commit(`set_accessToken`,data.accessToken);
-        await dispatch("verifyToken") // get the users info
-      }catch(err){return err.response.data.errors || "Erro do servidor"}
+        await dispatch("verifyToken")
+      }catch(err){return err.response.data.errors || err.response
+      }
     },
     async verifyToken({state,dispatch,commit}){
       try{
-        axios.defaults.headers.common["authorization"]=`bearer ${state.accessToken}`
-        const {data} = await axios.post(`/students/auth`);
-        return commit("set_user",data)
+        if(state.accessToken != null){
+
+          axios.defaults.headers.common["authorization"]=`bearer ${state.accessToken}`
+          const {data} = await axios.post(`/students/auth`);
+          return commit("set_user",data)
+        }else return{msg:"Acesso Negado"}
       }catch(err){
         await dispatch("clearStorage");
-        return err.response}
+        return err.response
+      }
     },
     async clearStorage({commit}){ // clear all
       delete axios.defaults.headers.common["authorization"];

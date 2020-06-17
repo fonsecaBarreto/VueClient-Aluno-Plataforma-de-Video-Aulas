@@ -11,6 +11,30 @@
   -ms-user-select: none;
   user-select: none;
 }
+.flex-row{
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;  
+  flex-direction: row;
+}
+.flex-column{
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;  
+  flex-direction: column;
+}
+.jus-center{justify-content: center!important;}
+.jus-start{justify-content: flex-start!important;}
+.jus-end{justify-content: flex-end!important;}
+.jus-space-between{justify-content: space-between!important;}
+
+.aln-center{align-items: center!important;}
+.aln-start{align-items: flex-start!important;}
+.aln-end{align-items: flex-end!important;}
 @font-face {
   font-family: "GothamMedium";
   src: url("./assets/GothamMedium.ttf");

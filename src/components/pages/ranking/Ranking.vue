@@ -1,14 +1,15 @@
 <template>
   <div id="ranking">
     <div class="box">
-      <img class="ranking-img" src="../../../assets/ranking.svg" alt="">
+      <img class="ranking-img" src="../../../assets/cup.jpg" alt="">
       <div class="d-flex flex-column my-2">
 
         <span class="ranking-title ">Ranking</span>
-        <span class="ranking-text">Vencer um desafio,
-          Procurar a superação,
-          Escapar por um fio,
-          E torná-se campeão.</span>
+        <span class="ranking-text">
+          The first place we must win the victory is in our own minds.
+           If you don't think you can be successful,
+            then you never will be.
+          </span>
       </div>
      
       <div class="ranking-flow ">

@@ -11,10 +11,13 @@ export default new Vuex.Store({
   state:{
     menu:false,
     loading:false,
+    screenWidth:0,
   },getters:{
+    get_screenWidth:(state,v)=>state.screenWidth,
     get_menu:(state)=>state.menu,
     get_loading:(state)=>state.loading,
   },mutations:{
+    set_screenWidth:(state,v)=>state.screenWidth=v,
     set_menu:(state,v)=>state.menu=v,
     set_loading:(state,v)=>state.loading=v
   },

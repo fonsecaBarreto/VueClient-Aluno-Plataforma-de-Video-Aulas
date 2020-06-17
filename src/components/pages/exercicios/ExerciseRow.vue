@@ -1,6 +1,10 @@
 <template>
-  <div class="exercise-item" :class="{'onhold':data==null,expanded}"  >
-    <div v-if="data" class="exercise-row" :class="{'correct':data.reply && data.reply.solved == true, 'incorrect':data.reply && data.reply.solved == false}">
+  <div class="exercise-item " :class="{'onhold':data==null,expanded}"  >
+    <div v-if="data" class="exercise-row " 
+    :class="{
+    'correct':data.reply && data.reply.solved == true, 
+    'incorrect':data.reply && data.reply.solved == false,
+    'partial':checkIfCorrect()}">
 
        <div class="expand-button " @click="toggle()"> 
          <font-awesome-icon :icon=" expanded ?'chevron-down' : 'chevron-right'"/>
@@ -9,7 +13,6 @@
       
         <span class="enunciation" v-if="!expanded">
           
-         
            {{data.enunciation}} </span>
     
         <span class="tip" v-if="expanded && data.tip">
@@ -22,22 +25,23 @@
          <span>
             {{data.reply.solved == true ? "" : data.reply.solved == false ? "" : "Aguardando correção"}}
          </span>
+         <span class="saldo-achievement pl-3 pr-2">{{data.reply.achievement}} / {{data.achievement}}</span>
          <font-awesome-icon :icon="data.reply.solved ==true ?'check-circle' :  data.reply.solved == false ? 'times-circle' : 'pause-circle'" class="mr-1"></font-awesome-icon>
        </span>
     </div>
     <transition name="roll">
-      <div v-if="data && expanded" class="exercise-row-body px-3 ">
+      <div v-if="data && expanded" class="exercise-row-body">
         <span class="full-enunciation "> {{data.enunciation}} </span>
         <div class="inputs-container  " :class="{disabled}">
           <div class="" v-if="data.type == 1">
             <div class="radio-group pl-4">
                 <div  v-for="(k,i) in data.options" :key="i"> 
-                    <input type="radio" :value="i" name="radio" v-model="answer.option" > <label for="radio"
+                    <input v-if="k != null" type="radio" :value="i" name="radio" v-model="answer.option" > <label for="radio"
                     >{{k}} </label>
                 </div>
             </div>
           </div>
-          <div v-else class="p-0">
+          <div v-else class="">
             <textarea  class="input-box " v-model="answer.text"></textarea>
           </div>
         </div>
@@ -53,7 +57,7 @@
           ({{data.options[data.resolution.answer]}})
         </span>
        </div>
-        <div class="exercise-bottom py-2 " v-if="data.reply == null || ( data.reply && data.reply.closed != true)">
+        <div class="exercise-bottom " v-if="data.reply == null || ( data.reply && data.reply.closed != true)">
      
           <button-a v-if="disabled  && ( data.reply.closed != true)" class="px-4" danger @click.native="edit()" >
             <font-awesome-icon icon="edit"></font-awesome-icon>
@@ -97,6 +101,18 @@ export default {
     }
   },
   methods:{
+    checkIfCorrect(){
+      if(this.data != null){
+        if ((this.data.reply && this.data.reply.solved == true)){
+   
+          if(this.data.achievement != null && this.data.reply.achievement != null ){
+      
+          if(this.data.achievement > this.data.reply.achievement) return true;
+         }
+       }
+      }
+     return false
+    },
     edit(){
       this.disabled = false;
     },
@@ -140,22 +156,27 @@ export default {
 </script>
 
 <style scoped>
+.saldo-achievement{
+  font-size: .7em;
+  color: #555;
+}
 .feedback-container{
-    padding:12px 22px 22px 22px;
- 
+    padding:12px ;
 }
 .exercise-bottom{
   width: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding-right: 22px;
+  padding:6px 0;
+  
 }
 .input-box{
   width: 100%;
-  height: 170px;
-  padding: 12px 16px;
-  border-radius: 2px;
+  min-height: 160px;
+  padding: 9px 12px;
+  border-radius: 5px;
+  border: solid 1px #bbb
 }
 .radio-group{
    margin-top: 18px;
@@ -167,10 +188,9 @@ export default {
 .exercise-row-body{
   min-height: 160px;
   background-color: white;
-  padding: 16px 0 0 0;
+  padding: 16px 14px 8px 14px;
   position: relative;
   border-bottom: solid 1px #ddd;
-  
 }
 .expand-button{
   height: 32px;
@@ -215,6 +235,8 @@ export default {
   position: relative;
   background-color: white;
 }
+
+ 
 .exercise-row:after{
   content: "";
   position: absolute;
@@ -228,6 +250,9 @@ export default {
 }
 .exercise-row.correct:after{
   background-color: rgb(77, 219, 134) !important;
+}
+.exercise-row.partial:after{
+  background-color: rgb(226, 194, 12) !important;
 }
 .enunciation{
   flex:1;
@@ -260,7 +285,7 @@ export default {
   text-overflow: ellipsis;
   display: flex;
   color: #333;
-   
+  margin-bottom: 6px;
 }
 .tip{
   flex:1;
@@ -279,7 +304,7 @@ export default {
 }
 .inputs-container{
   position: relative;
-  padding: 16px 22px 4px 0px;
+ 
 } 
 .inputs-container.disabled:after{
   content: "";

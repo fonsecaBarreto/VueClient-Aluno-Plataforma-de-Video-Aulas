@@ -52,12 +52,11 @@ export default {
       this.errors = []
       this.loading=true;
       const err = await this.$store.dispatch("obtainToken",{...this.credentials})
-      setTimeout(()=>{
-        this.loading=false
-        if(err && err.length) return this.errors = err;
-        this.$router.push({path:"/"})
+      this.loading=false
+      if(err && err.length) return this.errors = err;
+      this.$router.push({path:"/"})
         
-      },480)
+      
 
       
     }
@@ -76,10 +75,11 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../../../assets/loginbg.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+       background: #2b5876;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4e4376, #2b5876);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4e4376, #2b5876); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+   
+   
   }
   #login-screen:before{
     content: "";
@@ -88,17 +88,13 @@ export default {
     left:0;
     width: 100%;
     height: 100%;
-/*     background: rgb(25,61,137);
-    background: -moz-linear-gradient(90deg, rgba(25,61,137,1) 0%, rgba(35,51,102,1) 74%, rgba(35,51,102,1) 100%);
-    background: -webkit-linear-gradient(90deg, rgba(25,61,137,1) 0%, rgba(35,51,102,1) 74%, rgba(35,51,102,1) 100%);
-    background: linear-gradient(90deg, rgba(25,61,137,1) 0%, rgba(35,51,102,1) 74%, rgba(35,51,102,1) 100%);
-    */
-       background: #2b5876;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #4e4376, #2b5876);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #4e4376, #2b5876); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-    z-index: -1;
+     background-image: url("../../../assets/loginbg.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: .8;
+  
+ 
   }
   .login-box{
    
@@ -106,11 +102,11 @@ export default {
     width: 360px;
     background-color: rgb(250, 250, 250);
     margin-top: -100px;
-    box-shadow:  0px 6px 16px #000a;
+    box-shadow:  0px 4px 12px #000a;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 3px;
+    border-radius: 2px;
  
   }
   @media only screen and (max-width : 756px){

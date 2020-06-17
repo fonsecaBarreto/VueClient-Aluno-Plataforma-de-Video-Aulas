@@ -20,7 +20,6 @@ export const Modulo = {
     async loadRanking({commit}){
       try{
         const {data} = await axios.get(`/students/ranking`);
-        console.log(data)
         commit("set_ranking",data.ranking)
         commit("set_selfRanking",data.user)
       }catch(err){return err.response.data.errors || err.response}
@@ -28,7 +27,6 @@ export const Modulo = {
     async sendAnswer({commit},answer){
       try{
         const {id,option,text,type} = {...answer}
-        console.log(id,option,text,type)
         if(type == 1){ 
             const {data} = await axios.post(`/exercisesreplies/send/${id}`,{answer:{option}})
             return{err:null, data}

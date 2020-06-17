@@ -1,5 +1,5 @@
 <template>
-  <div class="content ">
+  <div class="content">
     <div class="app-container">
      
         <app-header v-if="title!= null" class="header" :title="title"></app-header>
@@ -21,8 +21,6 @@ export default {
     title(){
       return this.$route.name || this.get_module_title;
     }
-  },mounted(){
-    console.log(this.title)
   }
 }
 </script>
