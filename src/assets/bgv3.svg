@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Camada_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_2_);}
+	.st1{clip-path:url(#SVGID_4_);}
+	.st2{clip-path:url(#SVGID_6_);}
+	.st3{fill:url(#SVGID_7_);}
+	.st4{fill:#B81A39;}
+</style>
+<title>Prancheta 5</title>
+<g>
+	<defs>
+		<rect id="SVGID_1_" width="1920" height="1080"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g class="st0">
+		<defs>
+			<rect id="SVGID_3_" width="1920" height="1080"/>
+		</defs>
+		<clipPath id="SVGID_4_">
+			<use xlink:href="#SVGID_3_"  style="overflow:visible;"/>
+		</clipPath>
+		<g class="st1">
+			<g>
+				<defs>
+					<rect id="SVGID_5_" width="1920" height="1080"/>
+				</defs>
+				<clipPath id="SVGID_6_">
+					<use xlink:href="#SVGID_5_"  style="overflow:visible;"/>
+				</clipPath>
+				<g class="st2">
+					
+						<linearGradient id="SVGID_7_" gradientUnits="userSpaceOnUse" x1="53.97" y1="2307.196" x2="54.97" y2="2307.196" gradientTransform="matrix(1954.89 0 0 1954.89 -105527.0391 -4509774.5)">
+						<stop  offset="0" style="stop-color:#1F3C87"/>
+						<stop  offset="0.22" style="stop-color:#1F3C87"/>
+						<stop  offset="1" style="stop-color:#243263"/>
+						<stop  offset="1" style="stop-color:#243263"/>
+					</linearGradient>
+					<rect class="st3" width="1920" height="1080"/>
+				</g>
+			</g>
+			<polygon class="st4" points="0,717.7 0,1080 1920,1080 1920,381.6 			"/>
+		</g>
+	</g>
+</g>
+</svg>

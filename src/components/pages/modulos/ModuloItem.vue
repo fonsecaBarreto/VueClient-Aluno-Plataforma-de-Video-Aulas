@@ -2,16 +2,14 @@
     <div class="modulo-item " :class="{'onhold': data == null}">
 
     <div class="modulo"  v-if="data != null" @click="route(data.path)">
-        <div class="img-vp">  
-          <img :src="data.picture && data.picture.sm ? data.picture.md: null" alt="">
+        <div class="img-vp unselectable">  
+          <img :src="data.picture && data.picture.lg ? data.picture.lg: null" alt="">
         </div>
         <div class="write-content">
-
-          <span class="name">{{data.name}} </span>
-          <span class="description">
+          <span class="name unselectable">{{data.name}} </span>
+          <span class="description unselectable">
             {{data.description}}
           </span>
-        
         </div>
           
           <div class="detail mb-0 mt-auto"></div>
@@ -37,6 +35,41 @@ export default {
     width: 100%;
     height: 14px;
     border-top: solid 1px #ededed;
+    position: relative;
+    overflow: hidden;
+  }
+  .detail:after{
+    content: "";
+    position: absolute;
+    top: 0;left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 240px;
+    opacity: .4;
+  }
+  .detail:before{
+    content: "";
+    position: absolute;
+    top: -10px;right: 0;
+    width: 30%;
+    height: 200px;
+    background-color: rgb(206, 26, 41);
+    background-color: rgb(242, 242, 242);
+    border: solid 1px #ccc;
+    transform: rotate(20deg);
+    transition: all .5s;
+  }
+
+  @media only screen and (max-width:960px){
+    .detail{
+      display: none;
+    }
+    .write-content{
+      padding-bottom: 24px !important;
+    }
   }
   .modulo-item{
     width: 100%;
@@ -48,11 +81,19 @@ export default {
     border-radius: 2px;
     cursor: pointer;
     background-color: white;
+  
   }
   .modulo-item:hover{
     transition: all .2s;
-    box-shadow: 0px 3px 8px #0002;
   }
+   .modulo-item:hover .detail:before{background-color: #0575E6; }
+  /*  */
+  .modulo-item:active .detail:before{
+     background-color: rgb(206, 26, 41); 
+    transition: background .1s;
+
+  }
+
  
   .modulo{
     width: 100%;

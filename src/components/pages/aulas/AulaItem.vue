@@ -1,8 +1,16 @@
 <template>
   <div class="aula-item" :class="{'onhold':data==null}" >
+
     <div v-if="data != null" class="aula-row">
-      <div class="name" >
-        {{data.name}}</div>
+      <div class="name" >{{data.name}}</div>
+    <span  v-if="data.exercisesNotRevised > 0" class="flex-row notification mr-3">
+        {{data.exercisesNotRevised}} new!
+      </span> 
+
+         <span class="text-muted mr-2">
+          
+         {{data.exercisesReplied}} / {{data.exercisesAmount}}
+        </span> 
     </div>
   </div>
 </template>
@@ -15,9 +23,10 @@ export default {
 </script>
 
 <style scoped>
+ 
   .aula-item{
     width: 100%;
-    min-height: 36px;
+    min-height: 42px;
   }
 
   .aula-row{
@@ -28,28 +37,28 @@ export default {
     justify-content: flex-start;
     align-items: center;
     border-bottom: solid 1px #ddd;
- height:36px;
+    height:40px;
     position: relative;
-
+    overflow: hidden;
   }
   .aula-row:after{
     content: "";
     position: absolute;
-    top: 0;left:0;
+    top: 0;left:0px;
     height: 100%;
     width: 10px;
-    background-color: #ddd;
-    transition: background-color .2s;
+    background-color: rgb(240, 240, 240);
+    border: solid 1px #ddd;
+    transition: all .2s;
   }
   .aula-item:hover .aula-row:after{
-    transition: all .5s;
-    background-color: rgb(255, 255, 255);
-    width: 100%;
-    z-index: -1;
+    transition: all .25s;
+    background-color: #0575E6;
+     border: solid 1px #ddd;
   }
   .aula-item:active .aula-row:after{
     width: 100%;
-    border: black;
+      background-color: #0575E6;
      width: 10px;
   }
   .name{
@@ -75,5 +84,17 @@ export default {
   }
   .onhold{
     background-color: #ddd;
+  }
+  .notification{
+    width: fit-content;
+    background-color: rgb(131, 231, 153);
+    color: white;
+    text-shadow: 0px 2px 20px #0000;
+    height: 24px;
+    padding: 0 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center; justify-content: center;
+    margin-left: 18px;
   }
 </style>

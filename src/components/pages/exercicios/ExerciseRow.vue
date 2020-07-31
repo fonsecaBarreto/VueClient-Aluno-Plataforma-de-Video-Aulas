@@ -1,18 +1,18 @@
 <template>
   <div class="exercise-item " :class="{'onhold':data==null,expanded}"  >
+
     <div v-if="data" class="exercise-row " 
-    :class="{
-    'correct':data.reply && data.reply.solved == true, 
-    'incorrect':data.reply && data.reply.solved == false,
-    'partial':checkIfCorrect()}">
+      :class="{
+      'correct':data.reply && data.reply.solved == true, 
+      'incorrect':data.reply && data.reply.solved == false,
+      'partial':checkIfCorrect()}">
 
        <div class="expand-button " @click="toggle()"> 
          <font-awesome-icon :icon=" expanded ?'chevron-down' : 'chevron-right'"/>
       </div>
       <transition name="roll" >
-      
+       
         <span class="enunciation" v-if="!expanded">
-          
            {{data.enunciation}} </span>
     
         <span class="tip" v-if="expanded && data.tip">
@@ -22,8 +22,15 @@
          
       </transition>
       <span class="mr-3" v-if="data.reply"> 
-         <span>
-            {{data.reply.solved == true ? "" : data.reply.solved == false ? "" : "Aguardando correção"}}
+         <span class="spanonhold">
+            {{
+            data.reply.solved == true  && data.reply.revised == false? "Corrigido" : 
+            data.reply.solved == true  && data.reply.revised == true? "" : 
+
+            data.reply.solved == false  && data.reply.revised == false? "Corrigido" : 
+            data.reply.solved == false  && data.reply.revised == true? "" : 
+               "Aguardando correção" 
+            }}
          </span>
          <span class="saldo-achievement pl-3 pr-2">{{data.reply.achievement}} / {{data.achievement}}</span>
          <font-awesome-icon :icon="data.reply.solved ==true ?'check-circle' :  data.reply.solved == false ? 'times-circle' : 'pause-circle'" class="mr-1"></font-awesome-icon>
@@ -42,6 +49,7 @@
             </div>
           </div>
           <div v-else class="">
+              
             <textarea  class="input-box " v-model="answer.text"></textarea>
           </div>
         </div>
@@ -76,7 +84,8 @@
 const INITIAL_INPUTS = {
     id:null,
     text:null,
-    option:null
+    option:null,
+    revised:false
 }
 import ButtonA from "../../utils/ButtonA"
 import FreezeLoading from "./FreezeLoading"
@@ -96,7 +105,8 @@ export default {
       immediate: true,
       handler(data){
         this.disabled = (data && data.reply) ? true : false;
-        this.answer = (data && data.reply) ? {...data.reply.answer, id:data.id} : (data) ? {...INITIAL_INPUTS, id: data.id} : {...INITIAL_INPUTS}
+        this.answer = (data && data.reply) ? {...INITIAL_INPUTS,...data.reply.answer, id:data.id, revised:data.reply.revised} : 
+        (data) ? {...INITIAL_INPUTS, id: data.id} : {...INITIAL_INPUTS}
       }
     }
   },
@@ -125,7 +135,18 @@ export default {
         timer,
       })
     },
-    toggle(){this.expanded = !this.expanded},
+    toggle(){
+      
+      this.expanded = !this.expanded;
+      if(this.data.reply && this.data.reply.closed == true && this.data.reply.revised == false){
+        this.data.reply.revised = true
+        this.answer.revised = true
+        this.$store.dispatch("reviewExercise",this.data.reply.id);
+
+      }
+
+      
+      },
     async send(){
       this.loading = true;
       setTimeout(async ()=>{
@@ -156,6 +177,10 @@ export default {
 </script>
 
 <style scoped>
+.spanonhold{
+  color: #555;
+  font-size: .85em;
+}
 .saldo-achievement{
   font-size: .7em;
   color: #555;
@@ -312,11 +337,11 @@ export default {
   top: 0;left:0;
   width: 100%;
   height: 100%;
-background: rgb(121,121,121);
-background: -moz-linear-gradient(0deg, rgba(121,121,121,0.06206232492997199) 0%, rgba(255,255,255,0) 100%);
-background: -webkit-linear-gradient(0deg, rgba(121,121,121,0.06206232492997199) 0%, rgba(255,255,255,0) 100%);
-background: linear-gradient(0deg, rgba(121,121,121,0.06206232492997199) 0%, rgba(255,255,255,0) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#797979",endColorstr="#ffffff",GradientType=1);
+  background: rgb(121,121,121);
+  background: -moz-linear-gradient(0deg, rgba(121,121,121,0.06206232492997199) 0%, rgba(255,255,255,0) 100%);
+  background: -webkit-linear-gradient(0deg, rgba(121,121,121,0.06206232492997199) 0%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(0deg, rgba(121,121,121,0.06206232492997199) 0%, rgba(255,255,255,0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#797979",endColorstr="#ffffff",GradientType=1);
   z-index: 1;
 }
 

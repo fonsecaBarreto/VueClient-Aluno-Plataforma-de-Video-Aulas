@@ -3,7 +3,7 @@
     <div class="header-row ">
       <user-profile :user="get_user"></user-profile>
       <router-link to="/">
-        <img  class="logo" src="../../assets/logo.png" alt="">
+        <img  class="logo" src="../../assets/logo.webp" alt="">
       </router-link>
       <span class="toggle-button" @click="toggleMenu()">
         <font-awesome-icon icon="bars"></font-awesome-icon>
@@ -46,39 +46,30 @@ export default {
 
 <style scoped>
   
-  .header-menu{
-    width: 100%;
-    min-height: 200px;
-    background: #2b5876; 
-    background: -webkit-linear-gradient(to right, #4e4376, #2b5876);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #4e4376, #2b5876); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    box-shadow: 0px 4px 9px #0003;
-    z-index: -1;
-    position: absolute;
-    top: 64px;left:0;
-   
-  }
+
   header.header{
     transition: height .2s;
     position: relative;
-    width:100vw;
+
     height: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 2;
-   
-    
+  }
+  .header-menu{
+    width: 100%;
+    min-height: 200px;
+    background: #0e3672; 
+    box-shadow: 0px 4px 9px #0003;
+    z-index: -1;
+    position: absolute;
+    top: 64px;left:0;
   }
   header.header .header-row{
- /*    background: rgb(25,61,137);
-    background-color: #720615; */
-       background: #2b5876;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #4e4376, #2b5876);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #4e4376, #2b5876); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-
+   background: #0e3672; 
     width: 100%;
     height: 64px;
     position: relative;
@@ -96,7 +87,10 @@ export default {
     }
   }
   header.header .logo{
-    height: 38px;
+    height: 42px;
+    margin:auto;
+    position: absolute;
+    top: 0;left: 0;right: 0; bottom: 0;
   
   }
   header.header .profile{

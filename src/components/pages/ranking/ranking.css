@@ -1,0 +1,50 @@
+
+
+ .ranking-item.first , .ranking-item.second , .ranking-item.third {
+    border-top: solid 1pt #aaa !important;
+    border-bottom: solid 1pt #aaa !important;
+    
+   
+  } 
+  .ranking-item.first{
+    background:linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C)!important;
+
+  } 
+
+ 
+  .ranking-item.second{ 
+    background:
+    linear-gradient( -72deg,
+      #dedede,
+      #ffffff 16%,
+      #dedede 21%,
+      #ffffff 24%,
+   
+      #dedede 36%,
+      #ffffff 45%,
+      #ffffff 60%,
+      #dedede 72%,
+      #ffffff 80%,
+      #dedede 84%,
+      #a1a1a1
+    );;
+  }
+  .third{ 
+    background:
+    linear-gradient(
+      -72deg,
+      #a14521,
+      
+      #ca7345 21%,
+      #d68b5c 24%,
+      #ac4e28 27%,
+      #ca7345 36%,
+      #ebb18d 45%,
+
+      #ffdeca 70%,
+      #ca7345 80%,
+      #ca7345 84%,
+      #a14521
+    );
+
+  }

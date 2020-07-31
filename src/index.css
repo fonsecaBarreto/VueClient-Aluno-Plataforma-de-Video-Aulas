@@ -1,3 +1,8 @@
+/* .bd-red{border: solid 2px red!important;}
+.bd-green{border: dashed 2px green!important;}
+.bd-yellow{border: solid 3px yellow!important;}
+.bd-blue{border: solid 1px blue!important;}    */
+ 
 :root {
   --primary-color: #193D89;
   --second-color: #E41311;
@@ -52,11 +57,7 @@
  font-family: 'gothamBook', Arial, sans-serif;
   box-sizing: border-box;
 }
-.bd-red{border: solid 2px red;}
-.bd-green{border: dashed 2px green;}
-.bd-yellow{border: solid 3px yellow;}
-.bd-blue{border: solid 1px blue;} 
- 
+
 
 .rollup-enter-active, .rollup-leave-active {
   transition: all .25s;
@@ -67,19 +68,4 @@
   opacity: 0;
   transform: translateY(-200px);
 
-}
-@media only screen and (min-width:960px){
-
-  ::-webkit-scrollbar-track {
-    background-color: #F4F4F4;
-  }
-  ::-webkit-scrollbar {
-    width: 9px;
-    background: #bbb;
-    border-radius: 5px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #bbb;
-    border-radius: 5px;
-  } 
 }

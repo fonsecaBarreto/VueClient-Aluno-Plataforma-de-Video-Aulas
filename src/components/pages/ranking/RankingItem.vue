@@ -1,14 +1,26 @@
 <template>
-  <div class="ranking-item" :class="{highlight}">
+  <div class="ranking-item d-flex align-items-center" 
+    :class="{highlight, 
+    'first':numeration === 1,
+    'second':numeration === 2,
+    'third':numeration === 3
+    
+    
+    }">
     <span class="numeration">{{numeration}}</span>
-    <div class="user-img-vp " :class="{'img-holding':aluno_result.name == null }">
-      <user-profile :user="aluno" v-if="aluno_result.name != null" ></user-profile>
-    </div>
+    
+    <user-avatar :picture="aluno_result.picture"
+      :first="numeration  === 1"
+      :second="numeration === 2"
+      :third="numeration  === 3"
+    
+    ></user-avatar>
+
   
-   <span class="name " :class="{'onhold': aluno_result.name == null }">{{aluno_result.name}}</span>
-   <span class="points" :class="{'onhold': aluno_result.name == null  && aluno_result.points == null}">
+    <span class="name " :class="{'onhold': aluno_result.name == null }">{{aluno_result.name}}</span>
+    <span class="points" :class="{'onhold': aluno_result.name == null  && aluno_result.points == null}">
      
-      <font-awesome-icon icon="star"></font-awesome-icon>
+    <font-awesome-icon icon="star"></font-awesome-icon>
      {{aluno_result.points || '0'}}</span> 
   </div>
 </template>
@@ -19,14 +31,18 @@ const INITIAL_ALUNO ={
   points:null,
   picture:null
 }
-import UserProfile from "../../utils/UserProfile"
+import UserAvatar from "./UserAvatar"
+import "./ranking.css"
 export default {
-  components:{UserProfile},
+  components:{UserAvatar},
   props:{aluno:Object,numeration:Number,highlight:Boolean},
   computed:{
     aluno_result(){
-        var aluno = {...INITIAL_ALUNO};
-        if(this.aluno != null)aluno = {...this.aluno};
+        var aluno = {...INITIAL_ALUNO,...this.aluno};
+        aluno.picture = aluno.picture != null && aluno.picture.sm
+        ? aluno.picture.sm 
+        : ""
+        
         return aluno
     }
   }
@@ -34,10 +50,12 @@ export default {
 </script>
 
 <style scoped>
+
   .user-img-vp{
     position: relative;
     height: 38px;
     width: 38px;
+    background-color: white;
   }
   .user-img-vp.img-holding:after{
     content: "";
@@ -46,7 +64,6 @@ export default {
     height: 100%;
     left:0;top:0;
     border-radius: 50%;
-    background-color: red;
     background-color: #eee;
   }
   .numeration{
@@ -55,16 +72,15 @@ export default {
     width: 64px;
   }
   .ranking-item{
+    position: relative;
     max-width: 720px;
     width: 100%;
-    height: 52px;
+    height: 56px;
     border-bottom: solid 1px #ddd;
-    display:flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
+    background-color: white;
     padding: 0 18px;
-    margin-top: 6px;
+    margin: 4px 0;
+    border-radius: 12px;
   }
   @media only screen and (max-width:756px){
      .ranking-item{padding: 0 12px}
@@ -78,40 +94,21 @@ export default {
    @media only screen and (max-width:320px){
     .user-img-vp{ display: none;}
    }
-  .ranking-item.highlight{
-    background-color: #8d0f20;
-    background: #2b5876ee;  
-    background: #2b5876;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #4e4376, #2b5876);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #4e4376, #2b5876); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    border-radius: 12px;
-  }
-  .ranking-item.highlight *{color: white!important;}
-  .ranking-item .imgvp{
-    height: 32px;
-    width: 32px;
-    border-radius: 50%;
-    overflow: hidden;
-    position: relative;
-    border: solid 1px #999;
-  }
-  .ranking-item .imgvp>img{
-    position: absolute;
-    top: 0;bottom: 0;left: 0;right: 0;
-    margin:auto;
-    width: 100%;
-    object-fit: cover;
-  }
+
+
   .ranking-item .name{
+ 
+  max-width: 100%;
     flex:1;
-    min-height: 1.4em;
+    min-height: 1.8em;
+
     font-size: 1em;
-    line-height: 1.3em;
+    line-height: 1.9em;
     font-weight: 500;
     text-transform: uppercase;
     margin-left: 22px;
     position: relative;
-    max-height: 2.6em;
+    max-height: 1.9em;
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -121,18 +118,51 @@ export default {
     -webkit-line-clamp: 2;
     text-align: left;
     width: 100%;
+    background-color: white;
+    border-radius: 24px;
+    padding-left: 14px;
+    padding-right: 14px;
   }
 
   .ranking-item .points{
     width: fit-content;
-    min-width: 72px;
+    min-width: 80px;
     margin-left: 16px;
-    font-size: .9em;
+    font-size: 1em;
     color: #666;
-    height: 1.4em;
+    height: 1.8em;
+    line-height: 1.9em;
     position: relative;
-     
+    background-color: white;
+    border-radius: 24px;
+    text-align: center;
+    
   }
+ 
+ .ranking-item.first .points, 
+ .ranking-item.second .points,
+  .ranking-item.third .points{
+    color: #222!important;
+    box-shadow: inset 0px 2px 5px #0005;
+ 
+  } 
+ .ranking-item.first .name, 
+ .ranking-item.second .name,
+  .ranking-item.third .name{
+    color: #222!important;
+    box-shadow: inset 0px 2px 5px #0005;
+ 
+  } 
+ .ranking-item.first .numeration, 
+ .ranking-item.second .numeration,
+  .ranking-item.third .numeration{
+    font-size: 1.5em;
+    color: white!important;
+    text-shadow: 0px 0px 5px #0008;
+  } 
+
+
+
   .onhold:after{
     content: "";
     position: absolute;
@@ -143,5 +173,10 @@ export default {
     border-radius: 6px;
     background-color: #eee;
   
+  }
+  .ranking-item.highlight{
+    margin-top: 22px !important;
+    border: dashed 1.5pt #888
+
   }
 </style>

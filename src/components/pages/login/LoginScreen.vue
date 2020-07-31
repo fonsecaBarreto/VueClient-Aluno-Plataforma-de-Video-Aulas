@@ -1,5 +1,5 @@
 <template>
-  <div id="login-screen">
+  <div id="login-screen" class="bd-red">
    <div class="login-box">
       <img  id="loginlogo" :src="logo" alt="">
       <input-group label="Email" :warning="this.searchError('email')" >
@@ -72,42 +72,24 @@ export default {
   #login-screen{
     width: 100%;
     height: 100%;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-       background: #2b5876;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #4e4376, #2b5876);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #4e4376, #2b5876); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-   
-   
-  }
-  #login-screen:before{
-    content: "";
-    position: absolute;
-    top: 0;
-    left:0;
-    width: 100%;
-    height: 100%;
-     background-image: url("../../../assets/loginbg.svg");
-    background-repeat: no-repeat;
+    background-image: url("../../../assets/bgv3.svg");
     background-position: center;
-    background-size: cover;
-    opacity: .8;
-  
- 
+    background-size: cover; 
   }
   .login-box{
-   
     padding: 32px 20px;
     width: 360px;
     background-color: rgb(250, 250, 250);
     margin-top: -100px;
-    box-shadow:  0px 4px 12px #000a;
+    box-shadow:  0px 4px 10px #0008;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 2px;
- 
   }
   @media only screen and (max-width : 756px){
     .login-box{
@@ -115,9 +97,8 @@ export default {
       top: 32px;
       left: 0;right:0;
       margin: auto;
-      width: calc(100% - 12px);
-      
-    
+      width: calc(100% - 16px);
+      height: calc(100vh - 64px);
     }
   }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="dropdown ">
     <div class="dropdown-button" @click="show=!show">
-      <font-awesome-icon icon="chevron-down" />
+      <font-awesome-icon :icon="icon" />
     </div>
-    <div class="dropdown-body" v-show="show">
+    <div class="dropdown-body " v-show="show">
     
       <slot >
 
@@ -15,6 +15,7 @@
 
 <script>
 export default {
+  props:{icon:{type:String,default:"chevron-down"}},
   data(){
     return{
       show:false
@@ -25,22 +26,21 @@ export default {
 
 <style scoped>
   .dropdown{
-    z-index: 99999;
+    z-index: 1;
   }
  
   .dropdown-body{
-    right: 0;
-    top:40px;
+    right: 6px;
+    top:32px;
     border-radius: 3px;
-    box-shadow: 0px 12px 8px #00000019;
+    box-shadow: 0px 2px 4px #00000020;
     position: absolute;
     width: fit-content;
-    padding: 10px 16px;
+    padding: 6px 12px;
     border: solid 1px #ccc;
     background-color: white;
-    z-index: 9999;
-    min-width: 100px;
-    min-height: 48px;
+    z-index: 2;
+  
     display: flex;
     flex-direction: column;
     align-items: flex-start;

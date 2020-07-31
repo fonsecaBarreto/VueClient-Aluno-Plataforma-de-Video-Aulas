@@ -1,6 +1,5 @@
 <template>
-<div class="pt-4">
-
+<div >
   <div class="conteudos-flow">
     <modulo-item v-for="(m,i) in modulos" :key="i" :data="m"></modulo-item>
   </div>
@@ -19,7 +18,7 @@ export default {
     }
   },
   async mounted(){
-     this.$root.$emit('scrollAfterEnter');
+    this.$root.$emit('scrollAfterEnter');
     if(this.get_modules == null){
       const err = await this.$store.dispatch("loadModules");
       if(err) console.log(err)
@@ -35,8 +34,8 @@ export default {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
-  gap: 12px;
-  padding: 12px;
+  gap: 14px;
+ 
 }
 @media only screen and (max-width:1224px){
   .conteudos-flow{

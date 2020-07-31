@@ -5,9 +5,10 @@ import {API_URL} from "../global.js"
 axios.defaults.baseURL=API_URL;
 import {Aluno} from './aluno_store'
 import {Modulo} from './modules_store'
+import {Interactions} from "./interactions_store"
 Vue.use(Vuex)
 export default new Vuex.Store({
-  modules:{Aluno,Modulo},
+  modules:{Aluno,Modulo,Interactions},
   state:{
     menu:false,
     loading:false,

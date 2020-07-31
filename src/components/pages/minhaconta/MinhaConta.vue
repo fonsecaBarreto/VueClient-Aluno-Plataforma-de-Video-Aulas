@@ -152,7 +152,6 @@ export default {
     grid-template-columns: 280px 1fr;
     grid-template-rows:  1fr;
     max-width: 960px;
-    margin-top: 42px;
     padding: 32px 21px;
   }
   .left{

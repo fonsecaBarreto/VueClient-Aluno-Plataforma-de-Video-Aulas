@@ -2,25 +2,40 @@
       <div class="menu-contents">
  
       <router-link to="/modules" class="menu-item">
-        <font-awesome-icon icon="archive"></font-awesome-icon> 
+        <font-awesome-icon icon="archive" class="mi-icon"></font-awesome-icon> 
         <span>Módulos</span>
       </router-link>
       <router-link to="/profile" class="menu-item">
-        <font-awesome-icon icon="user"></font-awesome-icon> 
+        <font-awesome-icon icon="user" class="mi-icon" ></font-awesome-icon> 
         <span>
         Minha Conta
 
         </span>
       </router-link>
+      <router-link to="/interactions" class="menu-item">
+        <font-awesome-icon icon="handshake" class="mi-icon"></font-awesome-icon> 
+        <span>Feed</span>
+      </router-link>
+
       <router-link to="/ranking" class="menu-item">
-        <font-awesome-icon icon="star"></font-awesome-icon> 
+        <font-awesome-icon icon="star" class="mi-icon"></font-awesome-icon> 
         <span> Ranking</span>
       
       </router-link>
+
+      <a href="https://chat.whatsapp.com/FKrKONwzHulDO8alafdFpN" class="menu-item">
+
+        <div class="mi-icon whatsicon"></div>
+        <span> Whatsapp Group</span>
+      </a>
+
+      <router-link  to="/support" class="menu-item">
+        <font-awesome-icon icon="at" class="mi-icon"></font-awesome-icon> 
+        <span> Contato</span>
+      </router-link>
       <router-link to="/logout" class="menu-item">
-        <font-awesome-icon icon="sign-out-alt"></font-awesome-icon> 
+        <font-awesome-icon icon="sign-out-alt" class="mi-icon"></font-awesome-icon> 
         <span> Logout</span>
-      
       </router-link>
     </div>
 </template>
@@ -32,10 +47,22 @@ export default {
 </script>
 
 <style scoped>
+  .mi-icon{
+    width: 24px;
+  }
+  .whatsicon{
+    height: 1.1em;
+    background: url("../../assets/whatsapp.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    color: white;
+  }
+
   .menu-item{
     font-family: 'gothamBook', Arial, sans-serif;
     width: 100%;
-    height: 48px;
+    height: 42px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
