@@ -18,16 +18,8 @@
           </span>
         </div>
     </div>
-    <div v-else class="loading-comp">
+    <div v-else class="loading-comp py-3">
   
-        <span class="loading-comp-c1"></span>
-        <span class="loading-comp-c2"></span>
-        <span class="loading-comp-c1"></span>
-        <span class="loading-comp-c2"></span>
-        <span class="loading-comp-c1"></span>
-        <span class="loading-comp-c2"></span>
-        <span class="loading-comp-c1"></span>
-        <span class="loading-comp-c2"></span>
 
     
     </div>
@@ -49,21 +41,8 @@ export default {
 </script>
 
 <style scoped>
-  .loading-comp{
-    
-    height: 100%;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows:  repeat(1fr, 12) ;
-    gap: 5px;
-  }
-  .loading-comp span{
-    background-color: white;
-    height: 100%;
-    width: 100%;
-    border-radius: 4px;
-  }
+ 
+ 
  
   .modulo-item{
     width: 100%;

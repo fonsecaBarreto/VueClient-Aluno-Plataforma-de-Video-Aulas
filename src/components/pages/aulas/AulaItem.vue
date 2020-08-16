@@ -74,7 +74,9 @@ export default {
     color: #333;
   }
   .onhold{
-    background-color: #ddd;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    padding:8px
   }
   .notification{
     width: fit-content;

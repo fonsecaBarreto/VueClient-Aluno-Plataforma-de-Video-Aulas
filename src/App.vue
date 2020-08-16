@@ -31,15 +31,7 @@ export default {
   color: #444;
    background-color: rgb(250, 253, 255);
 }
-.app-container{
-  max-width: 1156px;
-  margin: auto;
-  padding: 0 24px;
-}
-@media screen and (max-width: 960px) {
-  .app-container{padding: 0 12px;}
-}
-/* .loading-comp{
+.loading-comp{
   position: relative;
 }
 .loading-comp{
@@ -53,5 +45,14 @@ export default {
   background-position: center;
   z-index: 9999;
   opacity: .7;
-} */
+} 
+.app-container{
+  max-width: 1156px;
+  margin: auto;
+  padding: 0 24px;
+}
+@media screen and (max-width: 960px) {
+  .app-container{padding: 0 12px;}
+}
+
 </style>

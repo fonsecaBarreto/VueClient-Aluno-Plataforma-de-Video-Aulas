@@ -16,10 +16,10 @@ export default {
   components:{ModuloItem},
   computed:{ ...mapGetters(["get_modules"]) },
   mounted(){
-   /* this.$root.$emit('scrollAfterEnter');
+   this.$root.$emit('scrollAfterEnter');
     if(!this.get_modules.length){
       this.$store.dispatch("loadModules");
-    }  */
+    } 
   }
 }
 </script>

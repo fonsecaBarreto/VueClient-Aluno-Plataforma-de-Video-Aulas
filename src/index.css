@@ -4,7 +4,7 @@
 .bd-blue{border: solid 1px blue!important;}    
  */
  
- .loading-comp > .loading-comp-c1{
+/*  .loading-comp > .loading-comp-c1{
    background: linear-gradient(-45deg, #e7e4e4, #e2e2e2);
 	background-size: 100% 100%;
 	animation: bumble 2s backwards infinite;
@@ -45,7 +45,7 @@
     transform: translateY(0);
 		background-position: 0% 50%;
 	}
-}
+} */
 :root {
   --primary-color: #193D89;
   --second-color: #E41311;
