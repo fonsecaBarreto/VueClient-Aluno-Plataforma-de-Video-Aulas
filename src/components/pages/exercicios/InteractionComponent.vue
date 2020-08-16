@@ -1,5 +1,5 @@
 <template>
-  <div class="exercises-interaction-flow">
+  <div class="exercises-interaction-flowc bd-red">
     <div class="hheader">
      <span class="eifh-toggle" @click="toggle()">
         <font-awesome-icon :icon="expand ?'chevron-down':'chevron-right'"></font-awesome-icon>
@@ -7,7 +7,7 @@
       <span > O que achou dessa aula? Comente! </span>
       </div>
      <!--  <transition name="roll" > -->
-      <div v-if="expand" class="bbody ">
+      <div v-if="expand" class="bbody bd-red">
 
         <sender-form :from="null" :module="id" @novo="novaInteracao" @sending="freezeit"></sender-form>
         <div class="flex-column mt-3" :class="{'bbody-loading':freeze}">
@@ -70,9 +70,6 @@ export default {
 <style scoped>
   .bbody{
     width: 100%;
-    min-height: 100px;
-    max-width:900px;
-    margin: auto;
     padding: 16px 22px;
     position: relative;
   }
@@ -98,7 +95,8 @@ export default {
     display: flex;
     justify-content: start;
     align-items: center;
-    font-size: 1.2em;
+    font-size: 1.1em;
+    color: rgb(17, 16, 95); ;
   }
   .hheader
   .eifh-toggle{

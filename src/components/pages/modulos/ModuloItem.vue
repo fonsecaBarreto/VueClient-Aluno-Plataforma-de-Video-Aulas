@@ -2,7 +2,7 @@
     <div class="modulo-item " :class="{'onhold': data == null}">
 
     <div class="modulo"  v-if="data != null" @click="route(data.path)">
-        <div class="img-vp unselectable">  
+        <div class="img-vp unselectable mt-2">  
           <img :src="data.picture && data.picture.lg ? data.picture.lg: null" alt="">
         </div>
         <div class="write-content">
@@ -12,7 +12,7 @@
           </span>
         </div>
           
-          <div class="detail mb-0 mt-auto"></div>
+         
     </div>
 
   </div>
@@ -73,7 +73,7 @@ export default {
   }
   .modulo-item{
     width: 100%;
-    min-height: 300px;
+    min-height: 280px;
     overflow: hidden;
     box-shadow: 0px 2px 4px #0001;
     border: solid 1px #ddd;
@@ -100,6 +100,7 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
   }
   .modulo .img-vp{
     width: 100%;
@@ -107,16 +108,30 @@ export default {
     position: relative;
     overflow: hidden;
   } 
+  .modulo::before{
+    content: "";
+    width: 100%;
+    height: 0;
+    padding-bottom: 60%;
+    background-color: #20276620;
+    position: absolute;
+    left: 0;top: 0px;
+    z-index: 0;
+  } 
+  
   .modulo-item:hover .modulo .img-vp> img{
     transition: transform .3s;
-    transform: scale(1.06);
+    transform: scale(1.05);
   }
   .write-content{
-    padding:14px 16px 16px 16px;
+    padding:6px 16px 16px 16px;
+    margin-top: 8px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    background-color: rgb(255, 255, 255);
+    z-index: 1;
   }
   .modulo .img-vp img{
     position: absolute;

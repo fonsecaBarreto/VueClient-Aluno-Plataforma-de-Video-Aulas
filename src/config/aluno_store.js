@@ -14,7 +14,7 @@ export const Aluno = {
     async updateUser({commit,dispatch},{id,name,email,picture,password}){
       try{
         if(picture != null && picture.key == undefined){
-          const {data,err} = await dispatch("uploadImage",{formData:picture,params:"?w=360&h=1"});
+          const {data,err} = await dispatch("uploadImage",{formData:picture,params:"?w=360&h=1&f=students/"});
           if(!err && data ) picture = data;
         }
         const {data} = await axios.put(`/students/update`,{id,name,email,picture,password});

@@ -61,7 +61,10 @@ export default {
   .header-menu{
     width: 100%;
     min-height: 200px;
-    background: #0e3672; 
+
+       background-color: #221E3D;
+    background: -webkit-linear-gradient(to right, #18142c, #29234b);  
+    background: linear-gradient(to right, #18142c, #29234b); 
     box-shadow: 0px 4px 9px #0003;
     z-index: -1;
     position: absolute;
@@ -69,7 +72,9 @@ export default {
   }
   header.header .header-row{
 
-   background: #0e3672; 
+      background-color: #221E3D;
+    background: -webkit-linear-gradient(to right, #18142c, #29234b);  
+    background: linear-gradient(to right, #18142c, #29234b); 
     width: 100%;
     height: 64px;
     position: relative;

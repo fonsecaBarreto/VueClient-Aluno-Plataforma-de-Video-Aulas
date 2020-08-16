@@ -12,7 +12,7 @@
       </div>
       <transition name="roll" >
        
-        <span class="enunciation" v-if="!expanded">
+        <span class="enunciation unselectable" v-if="!expanded">
            {{data.enunciation}} </span>
     
         <span class="tip" v-if="expanded && data.tip">

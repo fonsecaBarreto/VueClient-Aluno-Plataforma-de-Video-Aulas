@@ -46,6 +46,7 @@ export default {
     justify-content: flex-start;
     align-items: center;
     border-bottom: solid 1px #ddd;
+    
   }
 
   .content-header .title{
@@ -93,6 +94,12 @@ export default {
      color: #444;
   }
 
+  @media only screen and (max-width:1446px){
+
+    .user-div .user-name{
+      display: none;
+    }
+  }
   @media only screen and (max-width:960px){
 
     .user-div{

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faFacebook ,faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons'
 import VueCoreVideoPlayer from 'vue-core-video-player'
 
-Vue.use(VueCoreVideoPlayer)
+Vue.use(VueCoreVideoPlayer )
 library.add(faFacebook,faYoutube,faInstagram); library.add(fas)
 library.add(fas)
 Vue.component('font-awesome-icon', FontAwesomeIcon)

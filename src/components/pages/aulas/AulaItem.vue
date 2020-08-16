@@ -1,7 +1,7 @@
 <template>
   <div class="aula-item" :class="{'onhold':data==null}" >
-
-    <div v-if="data != null" class="aula-row">
+    <div v-if="data != null" class="aula-row unselectable">
+      <font-awesome-icon icon="play-circle" class="aula-pbutton"></font-awesome-icon>
       <div class="name" >{{data.name}}</div>
     <span  v-if="data.exercisesNotRevised > 0" class="flex-row notification mr-3">
         {{data.exercisesNotRevised}} new!
@@ -23,45 +23,40 @@ export default {
 </script>
 
 <style scoped>
- 
+  .aula-pbutton{
+    font-size: 1.2em;
+    cursor: pointer;
+  }
   .aula-item{
     width: 100%;
     min-height: 42px;
+  
   }
 
   .aula-row{
-    cursor: pointer;
+    cursor: unset;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    border-bottom: solid 1px #ddd;
     height:40px;
     position: relative;
     overflow: hidden;
+    font-weight: 500;
+    font-size: 1.1em;
+    padding: 0 12px;
+    border-radius: 5px;
   }
-  .aula-row:after{
-    content: "";
-    position: absolute;
-    top: 0;left:0px;
-    height: 100%;
-    width: 10px;
-    background-color: rgb(240, 240, 240);
-    border: solid 1px #ddd;
-    transition: all .2s;
+  .aula-row:hover{
+    background-color: #23275028;
   }
-  .aula-item:hover .aula-row:after{
-    transition: all .25s;
-    background-color: #0575E6;
-     border: solid 1px #ddd;
+  .aula-row:hover .aula-pbutton{
+    color: rgb(160, 14, 33);
   }
-  .aula-item:active .aula-row:after{
-    width: 100%;
-      background-color: #0575E6;
-     width: 10px;
-  }
+
   .name{
+    font-family: "gothamBook", Arial, Helvetica, sans-serif !important;
     flex:1;
     margin-left: 22px;
     width: 100%;
@@ -78,9 +73,6 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     color: #333;
-  }
-  .aula-item:hover .name{
-    color: black;
   }
   .onhold{
     background-color: #ddd;

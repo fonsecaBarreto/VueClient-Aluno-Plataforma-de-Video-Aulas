@@ -32,7 +32,7 @@ export default {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
   gap: 14px;
  

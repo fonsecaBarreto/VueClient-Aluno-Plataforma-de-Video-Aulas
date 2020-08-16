@@ -24,14 +24,18 @@ export default {
   .menu{
     width: 260px;
     height: 100vh;
-    position: relative;
-    background: #0575E6;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #021B79, #0523aa);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #021B79, #0523aa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+/*   position: relative;
+    background: #0575E6;  
+    background: -webkit-linear-gradient(to right, #021B79, #0523aa);  
+    background: linear-gradient(to right, #021B79, #0523aa); 
+    */
+   background-color: #221E3D;
+    background: -webkit-linear-gradient(to right, #18142c, #29234b);  
+    background: linear-gradient(to right, #18142c, #29234b); 
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0px 2px 16px #0009;
+    box-shadow: 0px 2px 12px #0006;
     z-index: 2;
   }
   .menu:before{
@@ -53,7 +57,7 @@ export default {
     left:0;top:0;
     width:100%;
     height:100%;
-    background-image: url("../../assets/bottommenu.svg");
+    background-image: url("../../assets/menubottom.svg");
     background-repeat: no-repeat;
     background-position: center calc(100%);
     background-size: 260px;

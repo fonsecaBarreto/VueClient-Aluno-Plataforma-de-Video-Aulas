@@ -68,6 +68,12 @@ export default {
     align-items: center;
     font-size: 1em;
     font-weight: 500;
+    -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   }
     
   .menu-item:hover{
