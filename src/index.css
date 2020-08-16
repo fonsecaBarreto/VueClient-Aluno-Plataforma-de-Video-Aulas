@@ -1,8 +1,51 @@
-/*  .bd-red{border: solid 2px red!important;}
+/* .bd-red{border: solid 2px red!important;}
 .bd-green{border: dashed 2px green!important;}
 .bd-yellow{border: solid 3px yellow!important;}
-.bd-blue{border: solid 1px blue!important;}     */
+.bd-blue{border: solid 1px blue!important;}    
+ */
+ 
+ .loading-comp > .loading-comp-c1{
+   background: linear-gradient(-45deg, #e7e4e4, #e2e2e2);
+	background-size: 100% 100%;
+	animation: bumble 2s backwards infinite;
+}
 
+ .loading-comp > .loading-comp-c2{
+  background: linear-gradient(-45deg, #e7e4e4, #e2e2e2);
+  background-size: 100% 100%;
+  animation: bumble-reverse 2s backwards infinite;
+}
+
+@keyframes bumble {
+	0% {
+
+    transform: translateX(0);
+		background-position: 0% 50%;
+	}
+	50% {
+    transform: translateX(6%);
+		background-position: 100% 50%;
+	}
+	100% {
+    transform: translateY(0);
+		background-position: 0% 50%;
+	}
+}
+@keyframes bumble-reverse {
+	0% {
+
+    transform: translateY(0);
+		background-position: 0% 50%;
+	}
+	50% {
+    transform: translateY(-6%);
+		background-position: 100% 50%;
+	}
+	100% {
+    transform: translateY(0);
+		background-position: 0% 50%;
+	}
+}
 :root {
   --primary-color: #193D89;
   --second-color: #E41311;

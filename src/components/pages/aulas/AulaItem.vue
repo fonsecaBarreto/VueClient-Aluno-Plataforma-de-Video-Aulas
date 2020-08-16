@@ -3,14 +3,13 @@
     <div v-if="data != null" class="aula-row unselectable">
       <font-awesome-icon icon="play-circle" class="aula-pbutton"></font-awesome-icon>
       <div class="name" >{{data.name}}</div>
-    <span  v-if="data.exercisesNotRevised > 0" class="flex-row notification mr-3">
+      <span  v-if="data.exercisesNotRevised > 0" class="flex-row notification mr-3">
         {{data.exercisesNotRevised}} new!
       </span> 
-
-         <span class="text-muted mr-2">
-          
-         {{data.exercisesReplied}} / {{data.exercisesAmount}}
-        </span> 
+      <span class="text-muted mr-2">{{data.exercisesReplied}} / {{data.exercisesAmount}} </span> 
+    </div>
+     <div v-else>
+      <div class="loading-comp"></div>
     </div>
   </div>
 </template>

@@ -1,7 +1,10 @@
 <template>
 <div>
-  <div class="conteudos-flow">
-    <aula-item v-for="(a,i) in aulas" :key="i" :data="a" @click.native="route(a.path)" ></aula-item>
+  <div class="conteudos-flow"  v-if="aulas.length">
+    <aula-item  v-for="(a,i) in aulas" :key="i" :data="a" @click.native="route(a.path)" ></aula-item>
+  </div>
+  <div class="conteudos-flow"  v-else>
+    <aula-item  v-for="(i) in 10" :key="i" ></aula-item>
   </div>
 </div>
 </template>
@@ -22,15 +25,14 @@ export default {
     }
   },
   computed:{
-    
     aulas(){
       var modules = this.modules;
       return modules || []
     },
     path(){return this.$route.params.module}
   },
-  async mounted(){
-    if(this.modules == null){
+ async mounted(){
+     if(this.modules == null){
       const {data,err} = await this.$store.dispatch("loadModulesChilds",this.path);
       if(err)console.log(err)
       if(data) {
@@ -40,13 +42,15 @@ export default {
         this.$store.commit("set_module_description",this.description)
       
       }
-    }
+    } 
   }
 }
 </script>
 
 <style scoped>
- 
+ .loading-comp{
+   
+ }
   .conteudos-flow{
     width: 100%;
     height: 100%;

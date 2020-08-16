@@ -62,18 +62,18 @@ export default {
   .menu-item{
     font-family: 'gothamBook', Arial, sans-serif;
     width: 100%;
-    height: 42px;
+    height: 40px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     font-size: 1em;
     font-weight: 500;
     -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
     
   .menu-item:hover{

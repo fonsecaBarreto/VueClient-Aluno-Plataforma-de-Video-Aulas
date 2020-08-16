@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const Modulo = {
   state:{
-    modules:null,
+    modules:[],
     module_title:null,
     module_description:null,
     ranking:[],
@@ -28,10 +28,7 @@ export const Modulo = {
       }catch(err){return err.response.data.errors || err.response}
     },
     async reviewExercise(c,id){
-      console.log("calling the police")
-      try{
-         await axios.put("/exercisesreplies/review/"+id)
-
+      try{ await axios.put("/exercisesreplies/review/"+id)
       }catch(err){return err.response}
     },
     async sendAnswer(c,answer){
@@ -50,7 +47,7 @@ export const Modulo = {
       try{
         const {data} = await axios.get(`/modules/prime`);
         commit("set_modules",data)
-      }catch(err){return err.response.data.errors || err.response}
+      }catch(err){console.log(err)}
     },
     async loadModulesChilds(c,path){
       try{

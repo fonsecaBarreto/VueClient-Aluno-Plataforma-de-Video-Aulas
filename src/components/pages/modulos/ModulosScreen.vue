@@ -1,7 +1,10 @@
 <template>
 <div >
-  <div class="conteudos-flow">
-    <modulo-item v-for="(m,i) in modulos" :key="i" :data="m"></modulo-item>
+  <div class="conteudos-flow" v-if="get_modules.length">
+    <modulo-item  v-for="(m,i) in get_modules" :key="i" :data="m"></modulo-item>
+  </div>
+  <div class="conteudos-flow" v-else>
+    <modulo-item v-for="(i) in 6" :key="i"></modulo-item>
   </div>
 </div>
 </template>
@@ -11,18 +14,12 @@ import {mapGetters} from "vuex"
 import ModuloItem from "./ModuloItem"
 export default {
   components:{ModuloItem},
-  computed:{...mapGetters(["get_modules"]),
-  modulos(){
-      var modules =this.get_modules;
-      return modules || []
-    }
-  },
-  async mounted(){
-    this.$root.$emit('scrollAfterEnter');
-    if(this.get_modules == null){
-      const err = await this.$store.dispatch("loadModules");
-      if(err) console.log(err)
-    }
+  computed:{ ...mapGetters(["get_modules"]) },
+  mounted(){
+   /* this.$root.$emit('scrollAfterEnter');
+    if(!this.get_modules.length){
+      this.$store.dispatch("loadModules");
+    }  */
   }
 }
 </script>
@@ -34,7 +31,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
-  gap: 14px;
+  gap: 16px;
  
 }
 @media only screen and (max-width:1224px){

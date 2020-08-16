@@ -1,7 +1,7 @@
 <template>
   <div id="app">
       <router-view name="templatelayout" >
-       <router-view name="content"></router-view> 
+        <router-view name="content"></router-view> 
       </router-view>
   </div>
 </template>
@@ -19,7 +19,6 @@ export default {
   methods: {
     handleResize() {
       this.$store.commit("set_screenWidth",window.innerWidth)
-    
     }
   }
 }
@@ -40,4 +39,19 @@ export default {
 @media screen and (max-width: 960px) {
   .app-container{padding: 0 12px;}
 }
+/* .loading-comp{
+  position: relative;
+}
+.loading-comp{
+  position: absolute;
+  top: 0;left: 0;
+  width: 100%;height: 100%;
+  background-color: rgb(248, 248, 248);
+  background-image: url("./assets/loading-alt.svg");
+  background-repeat: no-repeat;
+  background-size: 84px;
+  background-position: center;
+  z-index: 9999;
+  opacity: .7;
+} */
 </style>

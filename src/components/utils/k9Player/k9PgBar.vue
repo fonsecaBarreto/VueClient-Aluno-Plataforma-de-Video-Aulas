@@ -15,7 +15,7 @@ export default {
     width: 100%;
     height: 7px;
     background-color:rgba(0,0,0,.3);
-    margin: 1px;
+  
     cursor: pointer;
   }
   .pg-bar-content{

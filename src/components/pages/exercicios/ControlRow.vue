@@ -5,7 +5,7 @@
       <font-awesome-icon icon="chevron-left"></font-awesome-icon> 
         <span class="ml-2 btntextarr"> Aula anterior</span>
     </button>
-
+   
     <button @click="next" class="mnr-button mr-0 ml-auto" v-if="nextButton">
       <span class="mr-2 btntextarr">
         Proxima Aula

@@ -3,23 +3,25 @@
     <div :class="{'exercise-screen-loading':loading}"></div>
     <div class="exercise-screen-content" v-if="aula != null">
       <div class="exercises-flow" >
-          <k9-video-player :src="videosourceresult" ></k9-video-player>
-          <control-row :previous="()=>moveto(aula.before)" :next="()=>moveto(aula.after)" ></control-row>
+
+          <k9-video-player :src="videosourcesResult" ></k9-video-player>
+          <control-row :previous="()=>moveto(aula.before)" :next="()=>moveto(aula.after)" 
+            :previousButton="aula.before? true: false" :nextButton="aula.after? true: false" ></control-row>
           <attachment-row :attachment="aula.attachment" ></attachment-row> 
          
          <div v-if="aula.audiogroup != null" class="mt-3">
             <span class=" ex-header unselectable ">
               <font-awesome-icon icon="headphones-alt" class="mr-2"></font-awesome-icon> Listen up - {{aula.audiogroup.title}}</span>
-              <div class="d-flex flex-column mt-3">
+              <div class="d-flex flex-column mt-4">
 
                   <audio-row v-for="(a,i) in aula.audiogroup.content.audioentities" :key="i" :entity="a"></audio-row>
               </div>
          </div>
-     
+      
         <div class='mt-3'>
           <span class="ex-header unselectable ">
             <font-awesome-icon icon="sign-language" class="mr-2"></font-awesome-icon> Hands on!</span>
-            <div class="d-flex flex-column mt-3">
+            <div class="d-flex flex-column mt-4">
                <exercise-row v-for="(e,i) in aula.exercises" :key="i" :data="e" @updatereply="updatereply" class="mt-1"></exercise-row>
             </div>
         </div>
@@ -34,7 +36,6 @@
 
 <script>
 import ExerciseRow from "./ExerciseRow"
-import 'video.js/dist/video-js.css'
 import {mapGetters} from "vuex"
 import SenderForm from "../../pages/feed/SenderForm" 
 import Interaction from "../../pages/feed/Interaction" 
@@ -44,15 +45,12 @@ import InteractionComponent from "./InteractionComponent"
 import ControlRow from './ControlRow'
 import AudioRow from './AudioRow'
 const AULA = {
-  id:null, name:null,description:null,picture:null, attachment:null,video:null,
+  id:null, name:null,description:null,picture:null, attachment:null,video:null,before:null, after:null,
   exercises:[],interactions:[],
   videosource: {
     location:[]
   },
-  audiogroup:{
-    audioentities: []
-  },
-  before:null, after:null
+
 }
 export default {
   components:{ControlRow,AudioRow,ExerciseRow,SenderForm,Interaction,InteractionComponent,K9VideoPlayer,AttachmentRow},
@@ -63,14 +61,15 @@ export default {
       }
     },
   computed:{
-    videosourceresult(){
-      const resolutions=["144p","360p","480p","720p"]
+    videosourcesResult(){
+     
       var result = this.aula.video != null ?  [{src:this.aula.video,resolution:"720p"}] : [];
+
         if(this.aula.videosource.location.length > 0 ){ 
           result = this.aula.videosource.location.map((r,i)=>{
-          return {src:r.src,resolution:r.resolution}
-        })  
-      } 
+            return {src:r.src,resolution:r.resolution}
+          })  
+        } 
       return result
     },
     result_exercises(){var exercises = this.exercises;return exercises || []},
@@ -89,33 +88,40 @@ export default {
   watch:{
     path:{
       immediate:true,
-      async handler(){
-        this.loading = true
+      async handler(val){
+        console.log("alterando",val)
+        if(val == null) return 
+        this.loading = true;
+        this.aula = { ...AULA}
+        this.aula.exercises = []
+        this.aula.interactions = []
+        this.aula.videosource= {location:[]}
+        this.aula.audiogroup = null
         var {data,err} = await this.$store.dispatch("loadModuleExercises",this.$route.params.path);
         if(data) {
           this.$store.commit("set_module_title",data.name)
           this.$store.commit("set_module_description",data.description)
-          this.aula = {...AULA, ...data};
-          if(this.aula.videosource == null) this.aula.videosource = {...AULA.videosource}
-          this.aula.exercises = data.children ? data.children : [];
-          if(data.attachment != null ) this.aula.attachment = data.attachment; 
-          this.aula.after = data.after
-          this.aula.before = data.before
+          this.aula = { ...this.aula, ...data };
+          this.aula.exercises = data.children || []
+          this.aula.attachment = data.attachment || []
+          this.aula.after =  data.after || null
+          this.aula.before = data.before || null
           this.loading =false
-
-          this.$store.dispatch("loadInteraction",{module:data.id}).then(resp=>{this.aula.interactions= resp;})
+          this.$store.dispatch("loadInteraction",{module:data.id})
+            .then(resp=>{this.aula.interactions= resp;})
+            .catch(err=>console.log("não foi possivel baixar interações"))
         } 
       }
     }
   },
-  async mounted(){
-    
-  }
+
 }
 </script>
 
 <style scoped>
-
+  #exercises-screen{
+    padding-bottom: 180px;
+  }
 .ex-header{
   font-size: 1.1em;
   position: relative;
@@ -132,8 +138,6 @@ export default {
   background-color: rgb(17, 16, 95,.8); 
  
 }
-
-
 .exercise-screen-loading{
   position: absolute;top: 0;left: 0;
   width: 100%;height: 100%;
@@ -145,9 +149,6 @@ export default {
   z-index: 99999;
 }
 
-  #exercises-screen{
-    padding-bottom: 180px;
-  }
   .exercises-flow{
     width: 100%;
     height: 100%;

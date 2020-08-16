@@ -2,11 +2,9 @@
 <div class="k9video-container bd-red">
  
   <div class="k9video-vp" @click="play()">
-    <video class="k9video"  ref="video" :src="videoSourceResult" :muted="muted">
-   
+    <video class="k9video unselectable"  ref="video" :src="videoSourceResult" :muted="muted" controlsList="nodownload">
     </video>
   </div> 
-
   <div class="k9controls bd-green" ref="seekbar">
    
     <k9-pg-bar :progress="getProgressRate || 0"  @click.native = 'grabSeekbar'></k9-pg-bar>
@@ -45,7 +43,9 @@
               @click.prevent="changeResolution(i)"> {{v}}
               </a>
            </k9-right-ov>
-          <font-awesome-icon icon="cog" ></font-awesome-icon>
+          <font-awesome-icon icon="wave-square" >
+          </font-awesome-icon>
+            <span v-if="resolutions.length" class="small ml-1">{{resolutions[resolutionIndex]}}</span>
         </button>
 
 
@@ -66,6 +66,7 @@
 import K9PlayButton from "./K9PlayButton"
 import K9PgBar from "./k9PgBar"
 import K9RightOv from "./K9RightOv"
+import { mapGetters } from 'vuex'
 export default {
   props:{src:Array},
   components:{K9PlayButton,K9PgBar,K9RightOv},
@@ -79,7 +80,7 @@ export default {
       speed:1,
       speedConfig:false,
       dimConfig:false,
-      speeds:["0.75","1.00","1.25","1.75"],
+      speeds:["0.75","1.00","1.25","1.50"],
       resolutions:[],
       resolutionIndex:0,
       muted:false
@@ -122,9 +123,13 @@ export default {
     },
   },
   computed:{
+    ...mapGetters([ 'get_screenWidth' ]),
     videoSourceResult(){
-      const src = this.src[this.resolutionIndex].src
-      return src
+      var result = null
+      if(this.src.length){
+        result = this.src[this.resolutionIndex].src
+      }
+      return result
     },
     getProgressRate: function() {
       return (this.time / this.duration) * 100;
@@ -145,18 +150,19 @@ export default {
     speed(){this.vid.playbackRate = this.speed},
     src:{
       immediate:true,
-      handler(){
-         
-          this.resolutions = this.src.map((r)=>r.resolution)
+      handler (videos) { 
+        if(videos.length){
+          this.resolutions = videos.map((r)=>r.resolution)
           this.paused = true;
           this.time= 0
-          this.resolutionIndex=0
-    
+
+          this.resolutionIndex= this.get_screenWidth > 960 ? 0 : this.get_screenWidth > 640 ? 1 : 2
+        }
       }
     }
   },
   mounted(){
-     this.seekbar = this.$refs.seekbar
+    this.seekbar = this.$refs.seekbar
     this.vid = this.$refs.video;
     this.vid.addEventListener('loadedmetadata', () => { 
       this.vid.currentTime =this.time
@@ -169,7 +175,7 @@ export default {
       this.paused = true;
     });
     window.addEventListener('resize', this.reLayoutSeekbar);
-    this.reLayoutSeekbar()
+    this.reLayoutSeekbar() 
 
   }
 } 
@@ -182,13 +188,12 @@ export default {
   .k9button{
     position: relative;
     outline: none; border: none; background-color: transparent;
-    height: 30px;width: 30px;
+    height: 28px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1em;
-    color: rgb(236, 236, 236);
-    text-shadow: 0px 0px 5px #000;
+    align-items: center;justify-content: center;
+    font-size: 1em;
+    color: rgb(200, 200, 225);
+    text-shadow: 0px 1px 4px #000;
     cursor: pointer;
   }
   .k9button:hover{
@@ -203,21 +208,22 @@ export default {
     display: -webkit-flex;     /* NEW - Chrome */
     display: flex;  
     flex-direction: column;
-    border-radius: 6px;
+    border-radius: 5px;
     overflow: hidden;
+    border: solid 1px rgb(14, 5, 92);
+    box-shadow: 0px 4px 4px #0003;
+    
   }
   .k9video-vp{
     position: relative;
-    width: 100%;
-    padding-bottom:  46%;
-    position: relative;
+    width: 100%; padding-bottom:  46%;
     overflow: hidden;
+ 
     background-color: #111;
   }
   .k9video-container .k9controls{
     height: 48px;
     width: 100%;
-    background-color: #193D89;
     background-color: #221E3D;
     display: flex;
     flex-direction: column;

@@ -22,7 +22,7 @@
       <div class="date">{{interaction.views}} Visualizações</div>
     </span>
   
-    <router-link v-if="!sub && !noChildsCount" :to="'/interactions/'+interaction.path" class="flex-row aln-center ml-3 ">
+    <router-link v-if="false" :to="'/interactions/'+interaction.path" class="flex-row aln-center ml-3 ">
       <div class="date">Respostas</div>
     </router-link>
 

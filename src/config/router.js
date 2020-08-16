@@ -34,9 +34,7 @@ const routes = [
   { path:"/modules/:module",components:{templatelayout:MainTemplate,content:Aulas}},
   { name:"Módulos", path:"/modules",components:{templatelayout:MainTemplate,content:modulos}},
 /*   { name:"Manutence", path:"/manutence",components:{templatelayout:ManutenceScreen,content:null}},
-
- */
-
+*/
   {path:"/login",components:{templatelayout:Login,content:null}},
   {path:"/logout",beforeEnter:logout},
   {path:"/",redirect:"/modules"},
