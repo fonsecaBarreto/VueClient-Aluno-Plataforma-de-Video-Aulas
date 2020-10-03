@@ -1,40 +1,45 @@
 <template>
   <div class="exercise-item " :class="{'onhold':data==null,expanded}"  >
 
-    <div v-if="data" class="exercise-row " 
+    <div v-if="data" class="exercise-row px-3" 
       :class="{
-      'correct':data.reply && data.reply.solved == true, 
-      'incorrect':data.reply && data.reply.solved == false,
-      'partial':checkIfCorrect()}">
+      'icononhold': data.reply && data.reply.revised == false && data.reply.closed == false,
+      'correct':    data.reply && data.reply.solved == true,  
+      'incorrect':  data.reply && data.reply.solved == false,
+      'partial':    checkIfCorrect() }"
+    >
 
-       <div class="expand-button " @click="toggle()"> 
+      <span class="correction-status">
+        <font-awesome-icon   v-if="data.reply"
+          :icon="data.reply.solved === true ? 'check-circle' : data.reply.solved === false ? 'times-circle' : 'clock' ">
+        </font-awesome-icon>
+        <font-awesome-icon  v-if="!data.reply" icon="question-circle" ></font-awesome-icon>
+      </span>
+
+       <div class="expand-button" @click="toggle()"> 
          <font-awesome-icon :icon=" expanded ?'chevron-down' : 'chevron-right'"/>
       </div>
+
       <transition name="roll" >
-       
         <span class="enunciation unselectable" v-if="!expanded">
            {{data.enunciation}} </span>
     
-        <span class="tip" v-if="expanded && data.tip">
-            <font-awesome-icon icon="question-circle" class="questionmark"></font-awesome-icon>
-           {{data.tip}} </span>
-
-         
+        <span class="tip" v-if="expanded && data.tip && get_screenWidth > 960">
+            <font-awesome-icon icon="exclamation" class="exclamationmark mr-1"></font-awesome-icon>
+           {{data.tip}}
+        </span>
       </transition>
-      <span class="mr-3" v-if="data.reply"> 
-         <span class="spanonhold">
-            {{
-            data.reply.solved == true  && data.reply.revised == false? "Corrigido" : 
-            data.reply.solved == true  && data.reply.revised == true? "" : 
 
-            data.reply.solved == false  && data.reply.revised == false? "Corrigido" : 
-            data.reply.solved == false  && data.reply.revised == true? "" : 
-               "Aguardando correção" 
-            }}
-         </span>
-         <span class="saldo-achievement pl-3 pr-2">{{data.reply.achievement}} / {{data.achievement}}</span>
-         <font-awesome-icon :icon="data.reply.solved ==true ?'check-circle' :  data.reply.solved == false ? 'times-circle' : 'pause-circle'" class="mr-1"></font-awesome-icon>
-       </span>
+      <span class="ml-2 saldo-achievement d-flex justify-content-end align-items-center" > 
+        <span class=""> {{data.reply ? data.reply.achievement || 0 : 0 }}  </span>
+        <span class='mx-1'> / </span>
+        <span > {{data.achievement}}</span>
+
+        <font-awesome-icon  class="ml-2"
+          :icon=" data.reply && data.reply.solved ==true ?'star' : 
+          data.reply && data.reply.solved == false ? 'star-half-alt' : 'star'"></font-awesome-icon> 
+      </span>
+
     </div>
     <transition name="roll">
       <div v-if="data && expanded" class="exercise-row-body">
@@ -68,10 +73,10 @@
         <div class="exercise-bottom " v-if="data.reply == null || ( data.reply && data.reply.closed != true)">
      
           <button-a v-if="disabled  && ( data.reply.closed != true)" class="px-4" danger @click.native="edit()" >
-            <font-awesome-icon icon="edit"></font-awesome-icon>
+            <font-awesome-icon icon="pencil-alt" class="mr-1"></font-awesome-icon>
             Editar</button-a>
           <button-a v-if="!disabled" class="px-4" project @click.native="send()">
-            <font-awesome-icon icon="paper-plane"></font-awesome-icon>
+            <font-awesome-icon icon="arrow-alt-circle-right" class="mr-1"></font-awesome-icon>
             Enviar</button-a>
         </div>
       </div>
@@ -89,9 +94,13 @@ const INITIAL_INPUTS = {
 }
 import ButtonA from "../../utils/ButtonA"
 import FreezeLoading from "./FreezeLoading"
+import { mapGetters } from 'vuex'
 export default {
   props:{data:Object},
   components:{ButtonA,FreezeLoading},
+  computed:{
+    ...mapGetters(["get_screenWidth"])
+  },
   data(){
     return{
       expanded:false,
@@ -182,8 +191,11 @@ export default {
   font-size: .85em;
 }
 .saldo-achievement{
+  width: 84px;
+  height: 32px;
   font-size: .7em;
-  color: #555;
+  color: #666;
+ 
 }
 .feedback-container{
     padding:12px ;
@@ -206,9 +218,9 @@ export default {
 .radio-group{
    margin-top: 18px;
 }
-.questionmark{
-  font-size: .9em;
-  color: #666;
+.exclamationmark{
+  font-size: .75em;
+  color: #777;
 }
 .exercise-row-body{
   min-height: 160px;
@@ -216,16 +228,17 @@ export default {
   padding: 16px 14px 8px 14px;
   position: relative;
   border-bottom: solid 1px #ddd;
+  
 }
 .expand-button{
   height: 32px;
-  width: 64px;
+  width: 44px;
   margin-left: 0;margin-right: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: .8em;
-  color:#333;
+  color:#555;
   cursor: pointer;
 }
 .exercise-item{
@@ -241,7 +254,7 @@ export default {
 .exercise-row{
   z-index: 1;
   width: 100%;
-  height:36px;
+  height:38px;
   font-size: 1em;
   text-align: left;
   line-height: 1em;
@@ -259,26 +272,29 @@ export default {
   border-bottom: solid 1px #ddd;
   position: relative;
   background-color: white;
+  border-radius: 3px;
 }
-
- 
-.exercise-row:after{
-  content: "";
-  position: absolute;
-  top: 0;left:0;
+.correction-status{
+  display: flex;align-items: center;justify-content: center;
   height: 100%;
-  width: 10px;
-  background-color: #ddd;
+  color: #bbb;
+  border: solid 2px rgb(206, 206, 206);
+  border-radius: 50%;
+  height: 22px;
+  width: 22px;
 }
-.exercise-row.incorrect:after{
-  background-color: rgb(189, 45, 45);
+.exercise-row.incorrect .correction-status{
+  color: rgb(206, 51, 51);
 }
-.exercise-row.correct:after{
-  background-color: rgb(77, 219, 134) !important;
+.exercise-row.correct .correction-status{
+  color: rgb(64, 202, 119) !important;
 }
-.exercise-row.partial:after{
-  background-color: rgb(226, 194, 12) !important;
-}
+.exercise-row.partial .correction-status{
+  color: rgb(231, 140, 55) !important;
+} 
+.exercise-row.icononhold .correction-status{
+  color: rgb(150, 185, 231) !important;
+} 
 .enunciation{
   flex:1;
   width: 100%;

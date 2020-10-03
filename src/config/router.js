@@ -12,6 +12,7 @@ import Ranking from "../components/pages/ranking/Ranking"
 import Feed from "../components/pages/feed/Feed";
 import InteractionCollection from "../components/pages/feed/InteractionCollection"
 import Support from '../components/pages/support/Support'
+import Projectnotify from '../components/utils/ProjectNotify'
 const NotFound = resolve =>{
   require.ensure(["../components/pages/Error/NotFound"],()=>{
     resolve(require("../components/pages/Error/NotFound"))
@@ -32,7 +33,7 @@ const routes = [
   { name:"Minha Conta", path:"/profile",components:{templatelayout:MainTemplate,content:MinhaConta}},
   { path:"/modules/:module/:path",components:{templatelayout:MainTemplate,content:Exercises}},
   { path:"/modules/:module",components:{templatelayout:MainTemplate,content:Aulas}},
-  { name:"Módulos", path:"/modules",components:{templatelayout:MainTemplate,content:modulos}},
+  { name:"Módulos", path:"/modules",components:{templatelayout:MainTemplate,content:modulos, popup:Projectnotify}},
 /*   { name:"Manutence", path:"/manutence",components:{templatelayout:ManutenceScreen,content:null}},
 */
   {path:"/login",components:{templatelayout:Login,content:null}},

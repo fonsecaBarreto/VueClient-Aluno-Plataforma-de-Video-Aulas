@@ -39,13 +39,15 @@ export default {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    height:40px;
+    height:43px;
     position: relative;
     overflow: hidden;
     font-weight: 500;
     font-size: 1.1em;
     padding: 0 12px;
     border-radius: 5px;
+    background-color: rgb(246, 246, 246,.8);
+    border: solid 1px #e1e1e1;
   }
   .aula-row:hover{
     background-color: #23275028;
@@ -89,5 +91,15 @@ export default {
     display: flex;
     align-items: center; justify-content: center;
     margin-left: 18px;
+  }
+  @media only screen and (max-width: 960px){
+    .name{
+      font-size: .86em;
+    }
+  }
+  @media only screen and (max-width: 756px){
+    .name{
+      font-size: .72em;
+    }
   }
 </style>

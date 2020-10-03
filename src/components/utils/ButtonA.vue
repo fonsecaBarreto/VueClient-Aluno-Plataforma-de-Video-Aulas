@@ -25,7 +25,7 @@ export default {
 <style scoped>
  
   .button-a{
-    background: rgb(30, 121, 207);
+    background: #29234b;
     border-radius: 2px;
     padding: 6px 18px;
     border: none;
@@ -34,11 +34,11 @@ export default {
     box-shadow: 0px 0px 6px #0002;
     border-radius: 5px;
       -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   .w100{ width: 100% !important;}
   .round{border-radius: 64px!important;}
@@ -51,10 +51,7 @@ export default {
   .button-a.success{background: rgb(29, 160, 79);}
     .button-a.success:hover{background: rgb(19, 121, 58);}
   .project{
-    background: rgb(25,61,137);
-    background: -moz-linear-gradient(90deg, rgba(25,61,137,1) 0%, rgba(35,51,102,1) 74%, rgba(35,51,102,1) 100%);
-    background: -webkit-linear-gradient(90deg, rgba(25,61,137,1) 0%, rgba(35,51,102,1) 74%, rgba(35,51,102,1) 100%);
-    background: linear-gradient(90deg, rgba(25,61,137,1) 0%, rgba(35,51,102,1) 74%, rgba(35,51,102,1) 100%);
+   background: #29234b;
   }
 
   .button-a.project:active{ background: rgb(23, 54, 121); }

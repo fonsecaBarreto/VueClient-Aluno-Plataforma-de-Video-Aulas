@@ -2,6 +2,34 @@
 <div class="k9video-container bd-red">
  
   <div class="k9video-vp" @click="play()">
+    <div class="vp-mapping vp-left-mapping" @dblclick="backwards(10)">
+      
+      <transition name="showup">
+        <div class="vp-mapping-presentation" v-if="backwards_presentation">
+          <font-awesome-icon icon="chevron-left"></font-awesome-icon> 
+          <font-awesome-icon icon="chevron-left"></font-awesome-icon> 
+        </div>
+      </transition>
+    </div>
+    <div class="vp-mapping">
+         <transition name="showup">
+        <div class="vp-mapping-presentation" v-if="play_presentation">
+          <font-awesome-icon icon="play"></font-awesome-icon> 
+        
+        </div>
+      </transition>
+    </div>
+    <div class="vp-mapping vp-right-mapping" @dblclick="forward(15)">
+
+    <transition name="showup">
+      <div class="vp-mapping-presentation" v-if="forward_presentation">
+
+        <font-awesome-icon icon="chevron-right"></font-awesome-icon> 
+        <font-awesome-icon icon="chevron-right"></font-awesome-icon> 
+      </div>
+       </transition>
+
+    </div>
     <video class="k9video unselectable"  ref="video" :src="videoSourceResult" :muted="muted" controlsList="nodownload">
     </video>
   </div> 
@@ -83,21 +111,55 @@ export default {
       speeds:["0.75","1.00","1.25","1.50"],
       resolutions:[],
       resolutionIndex:0,
-      muted:false
+      muted:false,
+      forward_presentation:false,
+      backwards_presentation:false,
+      play_presentation: true
     }
   },
   methods:{
+    forward(secs){
+      this.forward_presentation = true
+      if(this.paused) this.play();
+      if(this.vid.currentTime + secs >= this.duration){
+        this.time = this.vid.currentTime = this.duration
+      }else{
+        this.time = this.vid.currentTime = this.vid.currentTime + secs;
+      }
+      setTimeout(()=>{
+        this.forward_presentation = false
+      }, 360)
+    },
+    backwards(secs){
+      this.backwards_presentation = true
+      if(this.paused) this.play();
+      if(this.vid.currentTime - secs <= 0){
+        this.time = this.vid.currentTime = 0
+      }else{
+        this.time = this.vid.currentTime = this.vid.currentTime - secs;
+      }
+      
+       setTimeout(()=>{
+        this.backwards_presentation = false
+      }, 360)
+    },
     changeSpeed(v){this.speed= Number(v)},
     changeResolution(i){ this.resolutionIndex= Number(i)},
     fullscreen(){this.vid.requestFullscreen()},
     play(){
       this.paused = !this.paused
+      
+      setTimeout(()=>{
+        this.play_presentation = this.paused
+      }, 281)
+
       this.speedConfig = false;
       this.dimConfig = false;
       if(!this.paused){
         this.vid.play()
         this.loop() 
       }else{
+     
         this.vid.pause()
       }  
     },
@@ -145,7 +207,6 @@ export default {
   watch:{
     resolutionIndex(){
       this.paused = true
-      
     },
     speed(){this.vid.playbackRate = this.speed},
     src:{
@@ -155,7 +216,6 @@ export default {
           this.resolutions = videos.map((r)=>r.resolution)
           this.paused = true;
           this.time= 0
-
           this.resolutionIndex= this.get_screenWidth > 960 ? 0 : this.get_screenWidth > 640 ? 1 : 2
         }
       }
@@ -167,11 +227,8 @@ export default {
     this.vid.addEventListener('loadedmetadata', () => { 
       this.vid.currentTime =this.time
       this.duration = this.vid.duration; 
-      this.play()
     });
     this.vid.addEventListener('ended', () => {
-      this.vid.currentTime = 0
-      this.duration = 0;
       this.paused = true;
     });
     window.addEventListener('resize', this.reLayoutSeekbar);
@@ -184,7 +241,46 @@ export default {
 </script>
 
 <style scoped>
+.vp-mapping-presentation{
+  width: 76px;
+  height: 76px;
+  background-color: #0004;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0px 0px 12px #0002;
+   font-size: 1.8em;
+}
+  .vp-mapping{
+    position: absolute;
+    top:0;bottom: 0;
+    margin: auto;
+    width: 24%;
+    height: 100%;
+    z-index: 6;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    left: 0;right:0;
+    color: white;
+   
+    
+  }
+  .vp-left-mapping{
+    width: 38%;
  
+    left:0;
+    right: auto;
+  }
+  .vp-right-mapping{
+    width: 38%;
+    
+    right: 0;
+    left: auto;
+  }
   .k9button{
     position: relative;
     outline: none; border: none; background-color: transparent;
@@ -208,10 +304,9 @@ export default {
     display: -webkit-flex;     /* NEW - Chrome */
     display: flex;  
     flex-direction: column;
-    border-radius: 5px;
+    border-radius: 4px;
     overflow: hidden;
-    border: solid 1px rgb(14, 5, 92);
-    box-shadow: 0px 4px 4px #0003;
+    box-shadow: 0px 4px 3px #0003;
     
   }
   .k9video-vp{
@@ -222,7 +317,7 @@ export default {
     background-color: #111;
   }
   .k9video-container .k9controls{
-    height: 48px;
+    height: 46px;
     width: 100%;
     background-color: #221E3D;
     display: flex;

@@ -11,9 +11,28 @@
               <button-a h="38px" danger @click.native="changepw()" > Alterar Senha</button-a>
               <button-a h="38px" project class="ml-2" @click.native="changeUser()" > Salvar</button-a>
             </div>
-   
         </div>
     </div>
+    <div class="pbox">
+      <div >
+        <font-awesome-icon icon="ticket-alt" class="mr-2"></font-awesome-icon>
+        <span class="font-weight-bold"> {{get_user.expiration - Date.now()  | militoDays}} dias </span>
+        <span> de acesso restantes</span>
+      </div>
+    </div>
+  <!--   <div class="pbox">
+
+      <div  class="mb-2">
+        <font-awesome-icon icon="chart-bar" class="mr-2"></font-awesome-icon>
+        <span >  statistics </span>
+      </div>
+
+      <div class="text-muted small ml-2">
+        <font-awesome-icon icon="star" class="mr-2"></font-awesome-icon>
+        <span > {{get_user.points}} points </span>
+  
+      </div>
+    </div> -->
     <t-modal :show="modal" size="md" @close="cancel()">
       <div class="password-box">
 
@@ -59,6 +78,11 @@ export default {
   components:{TModal,ImgInPerfil,InputGroup,ButtonA},
   computed:{
     ...mapGetters(["get_user"])
+  },
+  filters:{
+    militoDays(val){
+       return Math.ceil( Number(val) / (864 *(10**5)))
+    }
   },
    data(){return{
     changePassword:false,
@@ -126,9 +150,23 @@ export default {
 </script>
 
 <style scoped>
+.pbox{
+   background-color: white;
+    border-radius: 3px;
+    display: grid;
+    box-shadow:  0px 3px 6px #0002;
+    width: 100%;
+    max-width: 960px;
+    padding: 8px 22px;
+    margin: auto;
+}
 .minhaconta{
  
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  gap: 12px;
+  flex-direction: column;
   justify-content: flex-start;
 }
 .password-box{

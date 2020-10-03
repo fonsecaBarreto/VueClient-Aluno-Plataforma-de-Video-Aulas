@@ -3,9 +3,14 @@
     <header-header></header-header> 
     <Menu></Menu> 
     <Content>
-      <slot></slot>
+      <slot name="content"></slot>
+      
+      <div class="popupmodal">
+        <slot name="popup"></slot>
+      </div>
       <div class="loading-div" v-if="get_loading == true"></div>
     </Content> 
+    
   </div>
 </template>
 
@@ -21,7 +26,13 @@ export default {
 </script>
 
 <style>
-
+  .popupmodal{
+    position: absolute;
+    top:0;
+    left: 0; 
+    z-index: 9999999; 
+    width: 100%;
+  }
   #main-template{
     background-color: #304e4e10;
     flex:1;

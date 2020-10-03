@@ -18,11 +18,11 @@
       <span class="date ml-1">{{interaction.votes}}</span>
     </button>
 
-    <span v-if="showViews" class="flex-row aln-center ml-3 ">
+   <!-- <span v-if="showViews" class="flex-row aln-center ml-3 ">
       <div class="date">{{interaction.views}} Visualizações</div>
-    </span>
+    </span>  -->
   
-    <router-link v-if="false" :to="'/interactions/'+interaction.path" class="flex-row aln-center ml-3 ">
+    <router-link v-if="showAnswer" :to="'/interactions/'+interaction.path" class="flex-row aln-center ml-3 ">
       <div class="date">Respostas</div>
     </router-link>
 
@@ -49,10 +49,14 @@ const INITIAL = {
 import Dropdown from "../../utils/Dropdown"
 import {mapGetters} from "vuex"
 export default {
-  props:{entry:Object,sub:Boolean,
-  noChildsCount:Boolean,
-  showViews:{type:Boolean,default:true}},
-  
+  props:{
+    entry:Object,
+    sub:Boolean,
+    noChildsCount:Boolean,
+    showViews:{type:Boolean,default:true},
+    showAnswer:{type:Boolean,default:true}
+  },
+
   components:{DropDown:Dropdown},
   computed:{
     ...mapGetters(["get_user"])
@@ -65,9 +69,9 @@ export default {
   },
   methods:{
     async vote(){
-      console.log("voting")
+   
       const {data,err} = await this.$store.dispatch("voteInteraction",{id:this.interaction.id,from:"fresh"})
-      console.log("done voting")
+
       this.$emit("aftervote",data)
     },
     async deletar(){
@@ -91,6 +95,7 @@ export default {
     width: 100%;
     margin: auto;
     position: relative;
+    padding: 8px 12px;
   }
   .interaction.onloading::after{
     content: "";
@@ -105,15 +110,12 @@ export default {
     background-position: center;
     z-index: 9999;
   }
-  .interaction.sub{
-    border-bottom: solid 1px #eee;
-
-  }
+  .interaction.sub{ border-bottom: solid 1px #eee; margin-top: 12px;}
   .interaction .conteudo{
     flex:1;
     width: 100%;
     height: 100%;
-    padding: 16px 10px;
+    padding: 16px 10px 16px 10px;
     font-size: 1.2em;
     line-height: 1.2em;
     color: rgba(23, 40, 148, 0.75);
@@ -123,21 +125,22 @@ export default {
     flex:1;
     width: 100%;
     height: 100%;
-    padding: 6px 10px 16px 10px;
+    padding: 6px 10px 2px 10px;
     font-size: 1.1em;
     line-height: 1.2em;
     color: rgba(23, 40, 148, 0.75);
     font-weight: 550;
   }
   .interaction .info{
-    height: 24px;
-    color:#999;
+    height: 12px;
+    color:#888;
     font-size: .8em;
   }
   .interaction .author{
-    height: 24px;
+     height: 12px;
     color:#666;
-    font-size: .94em;
+    font-size: .9em;
+    line-height: 1em;
   }
   .interaction .options{
     cursor: pointer;
@@ -162,12 +165,12 @@ export default {
     transition: all .1s;
     outline: none;
     color: #777;
-    font-size: .9em;
+    font-size: 1em;
+    background-color: white;
   }
   .love-button:hover{
      outline: none;
-    background-color: rgb(255, 255, 255);
-    box-shadow: inset 0px 2px 6px #0001;
+     color: rgb(51, 42, 42)!important;
   }
   .love-button:active{
     color: red!important;

@@ -4,30 +4,30 @@
     <div class="exercise-screen-content" v-if="aula != null">
       <div class="exercises-flow" >
 
-          <k9-video-player :src="videosourcesResult" ></k9-video-player>
-          <control-row :previous="()=>moveto(aula.before)" :next="()=>moveto(aula.after)" 
-            :previousButton="aula.before? true: false" :nextButton="aula.after? true: false" ></control-row>
-          <attachment-row :attachment="aula.attachment" ></attachment-row> 
-         
-         <div v-if="aula.audiogroup != null" class="mt-3">
-            <span class=" ex-header unselectable ">
-              <font-awesome-icon icon="headphones-alt" class="mr-2"></font-awesome-icon> Listen up - {{aula.audiogroup.title}}</span>
-              <div class="d-flex flex-column mt-4">
+        <k9-video-player :src="videosourcesResult" v-if="aula.videosource" ></k9-video-player>
 
-                  <audio-row v-for="(a,i) in aula.audiogroup.content.audioentities" :key="i" :entity="a"></audio-row>
-              </div>
-         </div>
-      
-        <div class='mt-3'>
-          <span class="ex-header unselectable ">
-            <font-awesome-icon icon="sign-language" class="mr-2"></font-awesome-icon> Hands on!</span>
-            <div class="d-flex flex-column mt-4">
-               <exercise-row v-for="(e,i) in aula.exercises" :key="i" :data="e" @updatereply="updatereply" class="mt-1"></exercise-row>
-            </div>
-        </div>
+        <control-row class="mb-3" :previous="()=>moveto(aula.before)" :next="()=>moveto(aula.after)" 
+          :previousButton="aula.before? true: false" :nextButton="aula.after? true: false" ></control-row>
+        <attachment-row :attachment="aula.attachment" ></attachment-row> 
 
-        <interaction-component :id="aula.id" :interactions="aula.interactions" class="mt-3"></interaction-component>
-     
+        <colapse-component v-if="aula.audiogroup != null" :colapseState="aula.videosource ? false : true" icon="headphones-alt" 
+         title="Listen up" :description ="aula.audiogroup.description">
+          <div class="audio-flow d-flex flex-column pt-2 mb-3 pr-2">
+            <audio-row v-for="(a,i) in aula.audiogroup.content.audioentities" :key="i" :entity="a"></audio-row>
+          </div>
+        </colapse-component>
+
+        <colapse-component v-if="aula.exercises != null"  :colapseState="aula.videosource ? false : true" icon="sign-language"
+         title="Hands on!"  description ="Faça atividades e reforce oque aprendeu">
+          <div class="d-flex flex-column pt-2 mb-3">
+            <exercise-row v-for="(e,i) in aula.exercises" :key="i" :data="e" @updatereply="updatereply" class="mt-1"></exercise-row>
+          </div>
+        </colapse-component>
+
+        <colapse-component :colapseState="true" title="O que achou dessa aula? Comente!">
+          <interaction-component class="pt-3 mb-3" :id="aula.id" :interactions="aula.interactions" ></interaction-component>
+        </colapse-component>
+
      
       </div>
     </div>
@@ -44,6 +44,7 @@ import AttachmentRow from "./AttachmentRow"
 import InteractionComponent from "./InteractionComponent"
 import ControlRow from './ControlRow'
 import AudioRow from './AudioRow'
+import ColapseComponent from './ColapseComponent'
 const AULA = {
   id:null, name:null,description:null,picture:null, attachment:null,video:null,before:null, after:null,
   exercises:[],interactions:[],
@@ -53,7 +54,7 @@ const AULA = {
 
 }
 export default {
-  components:{ControlRow,AudioRow,ExerciseRow,SenderForm,Interaction,InteractionComponent,K9VideoPlayer,AttachmentRow},
+  components:{ColapseComponent,ControlRow,AudioRow,ExerciseRow,SenderForm,Interaction,InteractionComponent,K9VideoPlayer,AttachmentRow},
   data(){
     return { 
       aula:null,
@@ -77,7 +78,6 @@ export default {
   },
   methods:{
     moveto(to){
-   
       this.$router.push(`/modules/${this.$route.params.module}/${to.path}`)
     },
     updatereply(data){
@@ -119,6 +119,10 @@ export default {
 </script>
 
 <style scoped>
+.audio-flow{
+  max-height: 360px;
+  overflow-y: auto;
+}
   #exercises-screen{
     padding-bottom: 180px;
   }
@@ -158,7 +162,7 @@ export default {
     row-gap: 8px;
     padding: 0px 0px 32px 0px;
     max-width: 100%;
-    row-gap: 6px;
+    row-gap: 4px;
    
   }
  

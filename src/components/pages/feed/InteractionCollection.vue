@@ -1,6 +1,6 @@
 <template>
  <div id="interactions-feed">
-   <div class="feed-panel">
+   <div class="feed-panel" v-if="interaction">
     <interaction-thumb 
       :entry="interaction" noChildsCount 
        @aftervote="updateIt"
@@ -34,10 +34,12 @@ export default {
     return{
       interaction:{...INITIAL_INTERACTION}
     }
-  },methods:{
+  },
+  computed:{
+    id(){return this.$route.params.path}
+  },
+  methods:{
     updateIt(data){
-      console.log("afet votinf")
-      console.log(data)
       if(data != null) this.interaction = {...data[0],childs:this.interaction.childs}; 
     },
     concatInteraction(data){
@@ -45,10 +47,20 @@ export default {
     },
 
   },
-    mounted(){
-    this.$store.dispatch("loadInteraction",{path:this.$route.params.path})
-    .then(data=>{this.interaction = data[0]})
+  watch: {
+    id:{
+      immediate: true,
+      handler(val) {
+        if(val != null){
+           this.$store.dispatch("loadInteraction",{path:val})
+           .then(data=>{
+             this.interaction = data[0]})
+        }
+      }
+    }
+  
   }
+
 }
 </script>
 

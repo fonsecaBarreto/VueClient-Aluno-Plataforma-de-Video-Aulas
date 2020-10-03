@@ -1,5 +1,5 @@
 <template>
-  <div class="sender-form" :class="{'onloading':freeze}">
+  <div class="sender-form bd-green" :class="{'onloading':freeze}">
       <textarea   v-model="inputs.content" class="input-box" placeholder="Compartilhe as suas duvidas!"
        cols="30" rows="5"></textarea>
       <div class="flex-row jus-end">

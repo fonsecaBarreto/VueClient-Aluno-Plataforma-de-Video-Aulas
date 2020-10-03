@@ -23,10 +23,10 @@
       
       </router-link>
 
-      <a href="https://chat.whatsapp.com/FKrKONwzHulDO8alafdFpN" class="menu-item">
-
-        <div class="mi-icon whatsicon"></div>
-        <span> Whatsapp Group</span>
+      <a href="https://www.facebook.com/groups/372027323934098" class="menu-item" target="_blank">
+        <font-awesome-icon icon="users" class="mi-icon"></font-awesome-icon> 
+        
+        <span> Facebook Group</span>
       </a>
 
       <router-link  to="/support" class="menu-item">
@@ -35,7 +35,7 @@
       </router-link>
       <router-link to="/logout" class="menu-item">
         <font-awesome-icon icon="sign-out-alt" class="mi-icon"></font-awesome-icon> 
-        <span> Logout</span>
+        <span> Sair </span>
       </router-link>
     </div>
 </template>
@@ -62,7 +62,7 @@ export default {
   .menu-item{
     font-family: 'gothamBook', Arial, sans-serif;
     width: 100%;
-    height: 40px;
+    height: 38px;
     display: flex;
     justify-content: flex-start;
     align-items: center;

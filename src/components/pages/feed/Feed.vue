@@ -25,9 +25,7 @@ export default {
   
   },
   created(){
-    if(!this.get_fresh.length){
-      this.$store.dispatch("loadFresh")
-    }
+    this.$store.dispatch("loadFresh")
   }
 }
 </script>

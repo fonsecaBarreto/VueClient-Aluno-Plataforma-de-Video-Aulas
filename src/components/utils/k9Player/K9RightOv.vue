@@ -23,6 +23,7 @@ export default {
     transform: translateY(-100%);
     border-radius: 6px;
     color: white;
+    z-index: 6;
   }
   .right-ov span{
     font-size: .7em;

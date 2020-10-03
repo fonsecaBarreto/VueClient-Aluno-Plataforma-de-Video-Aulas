@@ -1,25 +1,14 @@
 <template>
-  <div class="exercises-interaction-flowc bd-red">
-    <div class="hheader">
-     <span class="eifh-toggle" @click="toggle()">
-        <font-awesome-icon :icon="expand ?'chevron-down':'chevron-right'"></font-awesome-icon>
-      </span> 
-      <span > O que achou dessa aula? Comente! </span>
+  <div class="bbody bd-red">
+    <sender-form :from="null" :module="id" @novo="novaInteracao" @sending="freezeit"></sender-form>
+    <div class="flex-column mt-3" :class="{'bbody-loading':freeze}">
+      <div class="mb-2 bg-white p-2"  v-for="a in interactionsresult" :key="a.id">
+        <Interaction  :entry="a" :showViews="false" :showAnswer="false"
+        @deleted="spliceDeleted" @aftervote="updateIt" ></Interaction>
       </div>
-     <!--  <transition name="roll" > -->
-      <div v-if="expand" class="bbody bd-red">
-
-        <sender-form :from="null" :module="id" @novo="novaInteracao" @sending="freezeit"></sender-form>
-        <div class="flex-column mt-3" :class="{'bbody-loading':freeze}">
-          <div class="mb-2 bg-white p-2"  v-for="a in interactionsresult" :key="a.id">
-
-            <Interaction  :entry="a" :showViews="false" 
-            @deleted="spliceDeleted" @aftervote="updateIt" ></Interaction>
-          </div>
-        </div>
-      </div>
-      <!-- </transition> -->
+    </div>
   </div>
+ 
 </template>
 
 <script>
@@ -30,7 +19,6 @@ export default {
   components:{SenderForm,Interaction},
   data(){
     return{
-      expand:true,
       interactionsresult:[],
       freeze:false
     }
@@ -70,7 +58,6 @@ export default {
 <style scoped>
   .bbody{
     width: 100%;
-    padding: 16px 22px;
     position: relative;
   }
   .bbody .bbody-loading{
@@ -87,29 +74,6 @@ export default {
     background-repeat: no-repeat;
     background-size: 120px;
     background-position: center 200px;
-   z-index: 9999;
-  }
-  .hheader{
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    font-size: 1.1em;
-    color: rgb(17, 16, 95); ;
-  }
-  .hheader
-  .eifh-toggle{
-    cursor: pointer;
-    width: 32px;
-    height: 32px;
-    font-size: .8em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .exercises-interaction-flow{
-    width: 100%;
-    margin: auto;
+    z-index: 9999;
   }
 </style>

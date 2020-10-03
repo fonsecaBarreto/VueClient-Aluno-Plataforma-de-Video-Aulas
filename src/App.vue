@@ -1,7 +1,14 @@
 <template>
   <div id="app">
       <router-view name="templatelayout" >
-        <router-view name="content"></router-view> 
+        <template v-slot:content>
+          <router-view name="content"></router-view> 
+        </template>
+
+        <template v-slot:popup>
+          <router-view name="popup"></router-view> 
+        </template>
+  
       </router-view>
   </div>
 </template>
